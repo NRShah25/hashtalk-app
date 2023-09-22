@@ -51,3 +51,6 @@
     padding: 10px;
     border-top: 1px solid rgb(128,128,128);
 }
+.sidebar__profileInfo >h3{
+    color: white;
+}
