@@ -19,11 +19,10 @@ function Sidebar() {
 
                 <AddIcon className="sidebar__addChannel"/>
             </div>
-        </div>
-
-        <div className="sidebar__channelsList">
-            <SidebarChannel />
-            <SidebarChannel />
+            <div className="sidebar__channelsList">
+                <SidebarChannel/>
+                <SidebarChannel/>
+            </div>
         </div>
     </div>)
 }
