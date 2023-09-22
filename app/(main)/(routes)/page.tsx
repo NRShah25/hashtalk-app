@@ -1,10 +1,12 @@
 import Sidebar from "./Sidebar";
+import './Home.css';
 
-export default function Home() {
+  function Home() {
     return (
-        <div>
+        <div className='Home'>
             <Sidebar/>
         </div>
 
     )
 }
+export default Home;
