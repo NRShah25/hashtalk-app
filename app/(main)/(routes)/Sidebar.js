@@ -24,10 +24,15 @@ function Sidebar() {
                 <SidebarChannel/>
             </div>
         </div>
-        <div>
+        <div className = 'sidebar__profile'>
             <UserButton
                 afterSignOutUrl="/"
             />
+            <div className="sidebar__profileInfo">
+                <h3> My name Here</h3>
+                <p>#this is id</p>
+            </div>
+
         </div>
     </div>)
 }
