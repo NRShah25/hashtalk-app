@@ -1,12 +1,14 @@
 import { UserButton } from "@clerk/nextjs";
-import SideBar from "./SideBar";
+import Sidebar from "./Sidebar";
+import './SidebarChannel.css';
 export default function Home() {
   return (
     <div>
+        <Sidebar />
       <UserButton
         afterSignOutUrl="/"
       />
-<SideBar />
+
     </div>
 
   )
