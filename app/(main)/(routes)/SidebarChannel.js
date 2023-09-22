@@ -10,5 +10,4 @@ function SidebarChannel({id, channel}) {
         </div>
     );
 }
-
 export default SidebarChannel;

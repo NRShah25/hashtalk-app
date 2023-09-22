@@ -1,4 +1,5 @@
 import React from 'react';
+import {UserButton} from "@clerk/nextjs";
 import "./SideBar.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
@@ -16,13 +17,17 @@ function Sidebar() {
                     <ExpandMoreIcon/>
                     <h4>Text Channels</h4>
                 </div>
-
                 <AddIcon className="sidebar__addChannel"/>
             </div>
             <div className="sidebar__channelsList">
                 <SidebarChannel/>
                 <SidebarChannel/>
             </div>
+        </div>
+        <div>
+            <UserButton
+                afterSignOutUrl="/"
+            />
         </div>
     </div>)
 }

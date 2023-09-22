@@ -5,9 +5,7 @@ import './SidebarChannel.css';
 export default function Home() {
     return (
         <div>
-            <UserButton
-                afterSignOutUrl="/"
-            />
+
             <Sidebar/>
         </div>
 
