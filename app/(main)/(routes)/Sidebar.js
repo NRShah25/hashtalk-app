@@ -15,7 +15,9 @@ function Sidebar() {
             <div className="sidebar__channelsHeader">
                 <div className="sidebar__header">
                     <ExpandMoreIcon/>
-                    <h4>Text Channels</h4>
+                    <h4>
+                        Channel Group
+                    </h4>
                 </div>
                 <AddIcon className="sidebar__addChannel"/>
             </div>
@@ -29,8 +31,8 @@ function Sidebar() {
                 afterSignOutUrl="/"
             />
             <div className="sidebar__profileInfo">
-                <h3> My name Here</h3>
-                <p>#this is id</p>
+                <h3> User</h3>
+                <p>#34625</p>
             </div>
 
         </div>
