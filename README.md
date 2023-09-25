@@ -26,19 +26,19 @@ Request the proper environment keys from a project administrator. You will place
 # 2. Installing Packages
 Install the following necessary packages:
 
-## 2.1 clerk-js
+## 2.1. clerk-js
 
 ```bash
 npm install @clerk/nextjs
 ```
 
-## 2.2 next-themes
+## 2.2. next-themes
 
 ```bash
 npm i next-themes
 ```
 
-## 2.3 prisma
+## 2.3. prisma
 
 ```bash
 npm i -D prisma
