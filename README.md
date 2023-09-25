@@ -45,6 +45,12 @@ npm i -D prisma
 npm i @prisma/client
 ```
 
+## 2.4. uploadthing
+
+```bash
+npm install uploadthing @uploadthing/react
+```
+
 # Getting Started
 Now, you can run the development server using the following command:
 
