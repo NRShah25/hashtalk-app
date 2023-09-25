@@ -14,7 +14,8 @@ Make sure any contributions you make are on an appropriate development branch. F
 ```bash
 git checkout dev
 ```
-3. Creating the .env File
+
+3. Creating the .env File:
 In order to manage environment variables, this project utilizes a ".env" file. This file contains sensitive information, therefore it is not available in the repository. You will have to setup your own .env file:
 
 In the root directory of the repository, create a file named ".env".
