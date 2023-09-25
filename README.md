@@ -14,9 +14,16 @@ cd hashtalk-app
 git checkout dev
 ```
 
+## Installing Packages
+Install the following necessary packages while in the root directory of your cloned hashtalk-app repository:
+
+```bash
+npm install @clerk/nextjs
+```
+
 ## Getting Started
 
-First, run the development server:
+Now, you can run the development server:
 
 ```bash
 npm run dev
