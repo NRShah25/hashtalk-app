@@ -24,7 +24,7 @@ In the root directory of the repository, create a file named ".env".
 Request the proper environment keys from a project administrator. You will place these keys in the .env file.
 
 # 2. Installing Packages
-Install the following necessary packages while in the root directory of the repository:
+Install the following necessary packages:
 
 ## 2.1 clerk-js
 
