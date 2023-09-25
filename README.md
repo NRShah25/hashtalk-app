@@ -5,7 +5,7 @@ Before you start contributing to the project, you need to setup the project on y
 
 1. Clone the Repository:
 ```bash
-git clone [https://](https://github.com/hashtalk-app/hashtalk-app.git)
+git clone https://github.com/hashtalk-app/hashtalk-app.git
 cd hashtalk-app
 ```
 
