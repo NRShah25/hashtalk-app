@@ -10,7 +10,7 @@ cd hashtalk-app
 ```
 
 ## 2. Switch to the Development Branch
-Make sure any contributions you make are on an appropriate development branch. For example:
+Make sure any contributions you make are pushed to an appropriate development branch. For example:
 ```bash
 git checkout dev
 ```
@@ -22,16 +22,14 @@ In the root directory of the repository, create a file named ".env".
 Request the proper environment keys from a project administrator. You will place these keys in the .env file.
 
 # Installing Packages
-Install the following necessary packages while in the root directory of your cloned hashtalk-app repository:
+Install the following necessary packages while in the root directory of the repository:
 
 ```bash
 npm install @clerk/nextjs
 ```
 
 # Getting Started
-
-Now, you can run the development server:
-
+Now, you can run the development server using the following command:
 ```bash
 npm run dev
 ```
