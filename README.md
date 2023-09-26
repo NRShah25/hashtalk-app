@@ -57,5 +57,13 @@ Now, you can run the development server using the following command:
 ```bash
 npm run dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to open the application locally.
+
+Prisma Studio can be accessed accordingly:
+
+```bash
+npx prisma studio
+```
+
+This command should automatically open up a browser window with Prisma Studio on [http://localhost:5000](http://localhost:5000).
+
