@@ -57,6 +57,13 @@ npm install uploadthing @uploadthing/react
 npm i axios
 ```
 
+## 2.6. uuid
+
+```bash
+npm i uuid
+npm i -D @types/uuid
+```
+
 # Getting Started
 Now, you can run the development server using the following command:
 
