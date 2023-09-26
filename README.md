@@ -51,6 +51,12 @@ npm i @prisma/client
 npm install uploadthing @uploadthing/react
 ```
 
+## 2.5. Axios
+
+```bash
+npm i axios
+```
+
 # Getting Started
 Now, you can run the development server using the following command:
 
