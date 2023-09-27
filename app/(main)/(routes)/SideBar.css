@@ -14,6 +14,7 @@
     background-color: #2f3135;
     color: white;
     border-bottom: 3px solid #26282c;
+    margin-top: 110px;
 }
 .sidebar__channels{
     flex: 1;

@@ -4,7 +4,9 @@
     align-items: center;
     color: rgb(128, 128, 128);
     padding: 10px;
+    margin-top: 108px;
 }
+
 .chatHeader__hash{
     color: rgb(128, 128, 128);
     font-size: 30px;

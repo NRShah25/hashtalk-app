@@ -1,0 +1,26 @@
+/* src/ServerBar.css */
+.serverbar {
+    max-height: 110px;
+    border: 1px solid #2f3135;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: fixed;
+    z-index: 10;
+    padding-top: 15px;
+    padding-left: 10px;
+    background-color: #26282c;
+}
+
+.serverbar::-webkit-scrollbar{
+    width: 0;
+ }
+
+.serverbar__image {
+    width: 90px;
+    height: 80px;
+    line-height: 110px;
+    text-align: center;
+    background-color: #2f3135;
+    margin-right: 10px;
+}
