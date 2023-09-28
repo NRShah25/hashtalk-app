@@ -1,6 +1,6 @@
 const ServerIdPage = () => {
     return (
-        <div>Server ID Page</div>
+        <div>This is a placeholder!</div>
     );
 }
 
