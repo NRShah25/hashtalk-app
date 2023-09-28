@@ -1,0 +1,49 @@
+Index: (main)/(routes)/WidgetBar.css
+===================================================================
+diff --git a/(main)/(routes)/WidgetBar.css b/(main)/(routes)/WidgetBar.css
+new file mode 100644
+--- /dev/null	
++++ b/(main)/(routes)/WidgetBar.css	
+@@ -0,0 +1,7 @@
++.widgetbar{
++    display: flex;
++    flex-direction: column;
++    flex: 0.20;
++    height: 100vh;
++    background-color: #2f3135;
++}
+\ No newline at end of file
+Index: (main)/(routes)/WidgetBar.js
+===================================================================
+diff --git a/(main)/(routes)/WidgetBar.js b/(main)/(routes)/WidgetBar.js
+new file mode 100644
+--- /dev/null	
++++ b/(main)/(routes)/WidgetBar.js	
+@@ -0,0 +1,11 @@
++import React from 'react'
++import "./WidgetBar.css"
++
++function Widgetbar(){
++    return(
++    <div className='widgetbar'>
++
++    </div>
++    )
++}
++export default Widgetbar
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	
++++ b/.idea/.gitignore	
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml

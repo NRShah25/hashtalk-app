@@ -1,0 +1,66 @@
+Index: (main)/(routes)/SideBar.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.sidebar{\n    display: flex;\n    flex-direction: column;\n    flex: 0.25;\n    height: 100vh;\n    background-color: #2f3135;\n}\n\n.sidebar__top {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 20px;\n    background-color: #2f3135;\n    color: white;\n    border-bottom: 3px solid #26282c;\n    margin-top: 110px;\n}\n.sidebar__channels{\n    flex: 1;\n}\n\n.sidebar__addChannel{\n    cursor: pointer;\n}\n.sidebar__addChannel:hover{\n    color: white;\n}\n\n.sidebar__channelsHeader{\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 10px;\n    background-color: #2f3135;\n    color: rgb(128, 128, 128);\n}\n.sidebar__header{\n    display: flex;\n    align-items: center;\n}\n.sidebar__profileInfo{\n    flex: 1;\n    padding: 10px;\n}\n.sidebar__profile{\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    color: rgb(128, 128, 128);\n    background-color: #2f3135;\n    padding: 10px;\n    border-top: 1px solid rgb(128,128,128);\n}\n.sidebar__profileInfo >h3{\n    color: white;\n}
+===================================================================
+diff --git a/(main)/(routes)/SideBar.css b/(main)/(routes)/SideBar.css
+--- a/(main)/(routes)/SideBar.css	
++++ b/(main)/(routes)/SideBar.css	
+@@ -1,7 +1,7 @@
+ .sidebar{
+     display: flex;
+     flex-direction: column;
+-    flex: 0.25;
++    flex: 0.20;
+     height: 100vh;
+     background-color: #2f3135;
+ }
+Index: (main)/(routes)/page.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Sidebar from \"./Sidebar\";\nimport './Home.css';\nimport Chat from \"./Chat\"\nimport ServerBar from \"./ServerBar\"\n\n  function Home() {\n    return (\n        <div className='Home'>\n            <header>\n                <ServerBar/>\n            </header>\n            <Sidebar/>\n            <Chat/>\n\n\n\n\n\n        </div>\n\n    )\n}\nexport default Home;
+===================================================================
+diff --git a/(main)/(routes)/page.tsx b/(main)/(routes)/page.tsx
+--- a/(main)/(routes)/page.tsx	
++++ b/(main)/(routes)/page.tsx	
+@@ -2,6 +2,7 @@
+ import './Home.css';
+ import Chat from "./Chat"
+ import ServerBar from "./ServerBar"
++import WidgetBar from "./WidgetBar"
+ 
+   function Home() {
+     return (
+@@ -11,13 +12,8 @@
+             </header>
+             <Sidebar/>
+             <Chat/>
+-
+-
+-
+-
+-
++            <WidgetBar/>
+         </div>
+-
+     )
+ }
+ export default Home;
+\ No newline at end of file
+Index: (main)/(routes)/Chat.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.chat{\n    display: flex;\n    flex-direction: column;\n    flex: 0.75;\n    background-color: #363a3f;\n}
+===================================================================
+diff --git a/(main)/(routes)/Chat.css b/(main)/(routes)/Chat.css
+--- a/(main)/(routes)/Chat.css	
++++ b/(main)/(routes)/Chat.css	
+@@ -1,6 +1,6 @@
+ .chat{
+     display: flex;
+     flex-direction: column;
+-    flex: 0.75;
++    flex: 0.60;
+     background-color: #363a3f;
+ }
+\ No newline at end of file
