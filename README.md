@@ -63,6 +63,11 @@ npm i axios
 npm i uuid
 npm i -D @types/uuid
 ```
+$$ 3.7. zustand
+
+```bash
+npm i zustand
+```
 
 # Getting Started
 Now, you can run the development server using the following command:
