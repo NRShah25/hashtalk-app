@@ -1,26 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#talk (pronounced "hashtalk") is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 1. Initial Setup
+Before you start contributing to the project, you need to setup the project on your local machine.
 
-First, run the development server:
+## 1.1. Clone the Repository
+
+```bash
+git clone https://github.com/hashtalk-app/hashtalk-app.git
+cd hashtalk-app
+```
+
+## 1.2. Switch to the Development Branch
+Make sure any contributions you make are pushed to an appropriate development branch. For example:
+
+```bash
+git checkout dev
+```
+
+## 1.3. Creating the .env File
+In order to manage environment variables, this project utilizes a ".env" file. This file contains sensitive information, therefore it is not available in the repository. You will have to setup your own .env file:
+
+In the root directory of the repository, create a file named ".env".
+Request the proper environment keys from a project administrator. You will place these keys in the .env file.
+
+# 2. Installing Packages
+Install the following necessary packages:
+
+## 2.1. clerk-js
+
+```bash
+npm install @clerk/nextjs
+```
+
+## 2.2. next-themes
+
+```bash
+npm i next-themes
+```
+
+## 2.3. prisma
+
+```bash
+npm i -D prisma
+npm i @prisma/client
+```
+
+## 2.4. uploadthing
+
+```bash
+npm install uploadthing @uploadthing/react
+```
+
+## 2.5. Axios
+
+```bash
+npm i axios
+```
+
+## 2.6. uuid
+
+```bash
+npm i uuid
+npm i -D @types/uuid
+```
+## 3.7. zustand
+
+```bash
+npm i zustand
+```
+
+# Getting Started
+Now, you can run the development server using the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to open the application locally.
+
+Prisma Studio can be accessed accordingly:
+
+```bash
+npx prisma studio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This command should automatically open up a browser window with Prisma Studio on [http://localhost:5000](http://localhost:5000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
