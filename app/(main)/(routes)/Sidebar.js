@@ -4,6 +4,7 @@ import "./SideBar.css";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import SidebarChannel from "@/app/(main)/(routes)/SidebarChannel";
+import {NavigationSidebar} from "../../../components/navigation/navigation-sidebar";
 
 function Sidebar() {
     return (<div className="sidebar">
@@ -11,6 +12,16 @@ function Sidebar() {
             <h3> Main Channel</h3>
             <ExpandMoreIcon/>
         </div>
+
+
+        <div className="h-full">
+            <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
+                <NavigationSidebar/>
+            </div>
+            <main className="md:pl-[72px] h-full">
+            </main>
+        </div>
+
         <div className="sidebar__channels">
             <div className="sidebar__channelsHeader">
                 <div className="sidebar__header">
@@ -26,7 +37,7 @@ function Sidebar() {
                 <SidebarChannel/>
             </div>
         </div>
-        <div className = 'sidebar__profile'>
+        <div className='sidebar__profile'>
             <UserButton
                 afterSignOutUrl="/"
             />
