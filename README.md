@@ -63,7 +63,7 @@ npm i axios
 npm i uuid
 npm i -D @types/uuid
 ```
-$$ 3.7. zustand
+## 3.7. zustand
 
 ```bash
 npm i zustand
