@@ -118,7 +118,7 @@ export const MembersModal = () => {
                   {roleIconMap[member.role]}
                 </div>
                 <p className="text-xs text-zinc-500">
-                  {member.profile.userId}
+                  {member.profile.email}
                 </p>
               </div>
               {server.profileId !== member.profileId && loadingId !== member.id && (
