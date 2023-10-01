@@ -10,7 +10,7 @@ import { ModalProvider } from '@/components/providers/modal-provider'
 const font = Open_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Hashtalk',
+  title: '#talk',
   description: 'Join the conversation revolution.',
 }
 
