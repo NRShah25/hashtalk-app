@@ -1,49 +1,79 @@
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { ServerSidebar } from "@/components/server/server-sidebar";
 
-const ServerIdLayout = async ({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
+interface ServerIdLayoutProps {
+  children: React.ReactNode; 
   params: { serverId: string };
-}) => {
+}
+
+/**
+ * Fetches the authenticated user's profile.
+ * If the user is not authenticated, it redirects them to sign in.
+ *
+ * @returns {null | object} Returns the user's profile if it exists, otherwise null.
+ */
+const fetchAuthenticatedProfile = async () => {
   const profile = await currentProfile();
-
   if (!profile) {
-    return redirectToSignIn();
+    redirectToSignIn();
+    return null;
   }
+  return profile;
+}
 
-  const server = await db.server.findUnique({
+/**
+ * Fetches the server details for a given profile and server ID.
+ *
+ * @param {string} serverId - The ID of the server.
+ * @param {string} profileId - The ID of the user's profile.
+ * @returns {object | null} Returns server details if found, otherwise null.
+ */
+const fetchServerForProfile = async (serverId: string, profileId: string) => {
+  return await db.server.findUnique({
     where: {
-      id: params.serverId,
+      id: serverId,
       members: {
         some: {
-          profileId: profile.id
+          profileId: profileId
         }
       }
     }
   });
+}
 
+/**
+ * The main ServerIdLayout component.
+ * It acts as a layout wrapper for content related to a specific server.
+ * - First, it checks if the user is authenticated and fetches their profile.
+ * - Then, it retrieves the server details using the provided server ID.
+ * - If the user is not a member of the server or if the server does not exist, they're redirected to the home page.
+ * - Finally, the layout along with the child components is rendered.
+ *
+ * @param {ServerIdLayoutProps} { children, params } - Properties passed to the component.
+ */
+const ServerIdLayout: React.FC<ServerIdLayoutProps> = async ({ children, params }) => {
+  const profile = await fetchAuthenticatedProfile();
+  if (!profile) return null;
+
+  const server = await fetchServerForProfile(params.serverId, profile.id);
   if (!server) {
-    return redirect("/");
+    redirect("/");
+    return null;
   }
 
-  return ( 
+  return (
     <div className="w-full mt-[-65px]">
-      <div 
-      className="hidden md:flex w-full h-16 z-20 fixed inset-x-0">
-        <ServerSidebar serverId={params.serverId} />
+      <div className="hidden md:flex w-full h-16 z-20 fixed inset-x-0">
+        <ServerSidebar serverId={params.serverId} /> 
       </div>
       <main className="w-full mt-16">
         {children}
       </main>
     </div>
-   );
+  );
 }
- 
+
 export default ServerIdLayout;
