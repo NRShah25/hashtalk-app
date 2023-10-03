@@ -27,6 +27,9 @@ import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
+/**
+ * Form schema for defining a new server.
+ */
 const formSchema = z.object({
   name: z.string().min(1, {
     message: "Server name is required."
@@ -36,6 +39,13 @@ const formSchema = z.object({
   })
 });
 
+/**
+ * CreateServerModal function component.
+ *
+ * Renders the modal dialog for creating a new server.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const CreateServerModal = () => {
   const { isOpen, onClose, type } = useModal();
   const router = useRouter();
@@ -52,6 +62,11 @@ export const CreateServerModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
+  /**
+   * Handles form submission to create a new server.
+   * 
+   * @param values - The validated form values.
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/servers", values);
@@ -64,6 +79,9 @@ export const CreateServerModal = () => {
     }
   }
 
+  /**
+   * Handles modal closure actions.
+   */
   const handleClose = () => {
     form.reset();
     onClose();
