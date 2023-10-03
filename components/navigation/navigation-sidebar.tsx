@@ -1,15 +1,23 @@
 import { redirect } from "next/navigation";
+
 import { UserButton } from "@clerk/nextjs";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
-import { currentProfile } from "@/lib/current-profile"
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-
 import { NavigationAction } from "./navigation-action";
 import { NavigationItem } from "./navigation-item";
 
+/**
+ * NavigationSidebar function component.
+ *
+ * Renders a sidebar containing navigation items for each server the user is 
+ * part of. Additionally, provides toggles for application modes and user profile actions.
+ * 
+ * @returns JSX.Element - The rendered component.
+ */
 export const NavigationSidebar = async () => {
   const profile = await currentProfile();
 
