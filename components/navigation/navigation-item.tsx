@@ -12,6 +12,19 @@ interface NavigationItemProps {
   name: string;
 };
 
+/**
+ * NavigationItem function component.
+ *
+ * Renders a navigational item, visually represented by an image. The item has 
+ * an associated tooltip that provides its name. The item becomes visually distinct 
+ * if it corresponds to the currently viewed server.
+ *
+ * @param id - The server's unique identifier.
+ * @param imageUrl - The server's associated image URL.
+ * @param name - The server's name.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const NavigationItem = ({
   id,
   imageUrl,
@@ -51,5 +64,5 @@ export const NavigationItem = ({
         </div>
       </button>
     </ActionTooltip>
-  )
+  );
 }
