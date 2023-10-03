@@ -2,9 +2,9 @@
 
 import axios from "axios";
 import * as z from "zod";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
 
 import {
   Dialog,
@@ -28,6 +28,9 @@ import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
+/**
+ * Form schema for editing a server.
+ */
 const formSchema = z.object({
   name: z.string().min(1, {
     message: "Server name is required."
@@ -37,6 +40,13 @@ const formSchema = z.object({
   })
 });
 
+/**
+ * EditServerModal function component.
+ *
+ * Renders the modal dialog for editing the details of an existing server.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const EditServerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
@@ -61,6 +71,11 @@ export const EditServerModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
+  /**
+   * Handles the form submission for editing a server.
+   *
+   * @param {object} values - Form values to be sent to the backend API.
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/servers/${server?.id}`, values);
