@@ -5,6 +5,13 @@ import { Hash } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
+/**
+ * NavigationAction function component.
+ *
+ * Renders the action button with a tooltip to create a new server.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const NavigationAction = () => {
   const { onOpen } = useModal();
 
@@ -28,5 +35,5 @@ export const NavigationAction = () => {
         </button>
       </ActionTooltip>
     </div>
-  )
+  );
 }
