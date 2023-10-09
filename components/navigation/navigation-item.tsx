@@ -12,6 +12,19 @@ interface NavigationItemProps {
   name: string;
 };
 
+/**
+ * NavigationItem function component.
+ *
+ * Renders a navigational item, visually represented by an image. The item has 
+ * an associated tooltip that provides its name. The item becomes visually distinct 
+ * if it corresponds to the currently viewed server.
+ *
+ * @param id - The server's unique identifier.
+ * @param imageUrl - The server's associated image URL.
+ * @param name - The server's name.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const NavigationItem = ({
   id,
   imageUrl,
@@ -26,7 +39,7 @@ export const NavigationItem = ({
 
   return (
     <ActionTooltip
-      side="right"
+      side="bottom"
       align="center"
       label={name}
     >
@@ -35,12 +48,12 @@ export const NavigationItem = ({
         className="group relative flex items-center"
       >
         <div className={cn(
-          "absolute left-0 bg-primary rounded-r-full transition-all w-[4px]",
-          params?.serverId !== id && "group-hover:h-[20px]",
-          params?.serverId === id ? "h-[36px]" : "h-[8px]"
+          "absolute bottom-0 bg-primary rounded-t-full transition-all h-[4px]",
+          params?.serverId !== id && "group-hover:w-[20px]",
+          params?.serverId === id ? "w-[36px]" : "w-[8px]"
         )} />
         <div className={cn(
-          "relative group flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden",
+          "relative group flex mx-3 h-[48px] w-[48px] rounded-[32px] group-hover:rounded-[16px] transition-all overflow-hidden",
           params?.serverId === id && "bg-primary/10 text-primary rounded-[16px]"
         )}>
           <Image
@@ -51,5 +64,5 @@ export const NavigationItem = ({
         </div>
       </button>
     </ActionTooltip>
-  )
+  );
 }

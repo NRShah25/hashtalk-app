@@ -36,9 +36,15 @@ const formSchema = z.object({
   })
 });
 
+/**
+ * InitialModal function component.
+ *
+ * Renders the initial setup modal dialog for the server.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const InitialModal = () => {
   const [isMounted, setIsMounted] = useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -55,6 +61,11 @@ export const InitialModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
+  /**
+   * Handles form submission to create a server.
+   *
+   * @param {object} values - Form values to be sent to the backend API.
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/servers", values);
@@ -65,7 +76,7 @@ export const InitialModal = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   if (!isMounted) {
     return null;
@@ -76,10 +87,10 @@ export const InitialModal = () => {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Customize your server
+            Welcome to #talk!
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Give your server a personality with a name and an image. You can always change it later.
+            This is a placeholder. For now, create a server:
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>

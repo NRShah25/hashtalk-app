@@ -34,6 +34,9 @@ import {
   SelectValue
 } from "@/components/ui/select";
 
+/**
+ * Form schema for defining a new channel.
+ */
 const formSchema = z.object({
   name: z.string().min(1, {
     message: "Channel name is required."
@@ -46,10 +49,17 @@ const formSchema = z.object({
   type: z.nativeEnum(ChannelType)
 });
 
+/**
+ * CreateChannelModal function component.
+ *
+ * Renders the modal dialog for creating a new channel.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const CreateChannelModal = () => {
   const { isOpen, onClose, type } = useModal();
   const router = useRouter();
-  const params = useParams()
+  const params = useParams();
 
   const isModalOpen = isOpen && type === "createChannel";
 
@@ -63,6 +73,11 @@ export const CreateChannelModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
+  /**
+   * Handles form submission to create a new channel.
+   * 
+   * @param values - The form values.
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const url = qs.stringifyUrl({
@@ -81,6 +96,9 @@ export const CreateChannelModal = () => {
     }
   }
 
+  /**
+   * Handles modal closure.
+   */
   const handleClose = () => {
     form.reset();
     onClose();
