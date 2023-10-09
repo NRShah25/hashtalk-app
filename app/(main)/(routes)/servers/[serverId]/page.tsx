@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import SendSharpIcon from '@mui/icons-material/SendSharp';
 
 const ServerIdPage = () => {
     return (
@@ -13,9 +14,9 @@ const ServerIdPage = () => {
                 <div className="flex items-center space-x-2">
                     <Textarea
                         placeholder="Type your message here."
-                        style={{ width: '75%', height: '2.5rem', padding: '0.25rem' }}
+                        style={{ width: '75%', height: '1.5rem', padding: '0.25rem', textAlign: 'left' }}
                     />
-                    <Button className="h-8">Send message</Button>
+                    <Button className="h-8"><SendSharpIcon /></Button>
                 </div>
             </div>
         </div>
