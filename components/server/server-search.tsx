@@ -81,7 +81,6 @@ export const ServerSearch = ({
                                         </CommandItem>
                                     )
                                 })}
-
                             </CommandGroup>
                         )
                     })}
