@@ -6,8 +6,9 @@ import { redirect } from "next/navigation";
 
 import { ServerHeader } from "@/components/server/server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ServerSearch } from "./server-search";
+import { ServerSearch } from "@/components/server/server-search";
 import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
+import { ServerImage } from "@/components/server/server-image";
 
 interface ServerSidebarProps {
     serverId: string;
@@ -68,13 +69,20 @@ export const ServerSidebar = async ({
 
     return (
         <div className="flex h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]">
-            <div className="flex-2">
+            <div className="flex-1" style={{flex: 0.25}}>
+                <ServerImage 
+                    id={""} 
+                    imageUrl={server.imageUrl} 
+                    name={""} 
+                />
+            </div>
+            <div className="flex-2" style={{flex: 7.75}}>
                 <ServerHeader 
                     server={server}
                     role={role}
                 /> 
             </div>
-            <div className="flex-8">
+            <div className="flex-3" style={{flex: 2}}>
                 <ScrollArea className="flex-1 px-3">
                     <div className="mt-2">
                         <ServerSearch 
@@ -122,4 +130,5 @@ export const ServerSidebar = async ({
             </div>
         </div>
     )
+    
 }
