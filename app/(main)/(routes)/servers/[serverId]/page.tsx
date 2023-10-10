@@ -15,7 +15,7 @@ const ServerIdPage = () => {
                     <Textarea
                         placeholder="Type your message here."
                         style={{
-                            width: '50%',
+                            width: '70%',
                             height: '1.5rem',
                             padding: '0rem',
                             textAlign: 'left',
