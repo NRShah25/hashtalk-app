@@ -36,42 +36,42 @@ export const ServerToolbar = ({
     <div className="flex flex-row justify-center items-center h-full w-full">
       {isModerator && (
         <ActionTooltip side="bottom" align="center" label="Invite Code">
-          <button onClick={() => onOpen("invite", { server })} className="mr-3 px-2 py-2 text-md">
+          <button onClick={() => onOpen("invite", { server })} className="mr-3 px-2 py-2 text-md hover:brightness-200 transition-brightness">
             <UserPlus className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
           </button>
         </ActionTooltip>
       )}
       {isAdmin && (
         <ActionTooltip side="bottom" align="center" label="Edit Server">
-          <button onClick={() => onOpen("editServer", { server })} className="mr-3 px-2 py-2 text-md">
+          <button onClick={() => onOpen("editServer", { server })} className="mr-3 px-2 py-2 text-md hover:brightness-200 transition-brightness">
             <Settings className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
           </button>
         </ActionTooltip>
       )}
       {isAdmin && (
         <ActionTooltip side="bottom" align="center" label="Manage Members">
-          <button onClick={() => onOpen("members", { server })} className="mr-3 px-2 py-2 text-md">
+          <button onClick={() => onOpen("members", { server })} className="mr-3 px-2 py-2 text-md hover:brightness-200 transition-brightness">
             <UserCog className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
           </button>
         </ActionTooltip>
       )}
       {isModerator && (
         <ActionTooltip side="bottom" align="center" label="Create Channel">
-          <button onClick={() => onOpen("createChannel")} className="mr-3 px-2 py-2 text-md">
+          <button onClick={() => onOpen("createChannel")} className="mr-3 px-2 py-2 text-md hover:brightness-200 transition-brightness">
             <MessageSquarePlus className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
           </button>
         </ActionTooltip>
       )}
       {isAdmin && (
         <ActionTooltip side="bottom" align="center" label="Delete Server">
-          <button onClick={() => onOpen("deleteServer", { server })} className="mr-3 px-2 py-2 text-md">
+          <button onClick={() => onOpen("deleteServer", { server })} className="mr-3 px-2 py-2 text-md hover:brightness-200 transition-brightness">
             <XSquare className="h-6 w-6 text-rose-500" />
           </button>
         </ActionTooltip>
       )}
       {!isAdmin && (
         <ActionTooltip side="bottom" align="center" label="Leave Server">
-          <button onClick={() => onOpen("leaveServer", { server })} className="px-2 py-2 text-md">
+          <button onClick={() => onOpen("leaveServer", { server })} className="px-2 py-2 text-md hover:brightness-200 transition-brightness">
             <DoorOpen className="h-6 w-6 text-rose-500" />
           </button>
         </ActionTooltip>
@@ -79,4 +79,6 @@ export const ServerToolbar = ({
     </div>
   )
 }
+
+
 
