@@ -69,7 +69,7 @@ const ServerIdLayout: React.FC<ServerIdLayoutProps> = async ({ children, params 
         <div className="hidden md:flex h-16 z-20 fixed inset-x-0">
           <ServerSidebar serverId={params.serverId} />
         </div>
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto w-full">
           {children}
         </main>
       </div>
