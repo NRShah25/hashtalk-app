@@ -22,7 +22,7 @@ export const ServerImage = ({
   return (
       <div className="relative flex items-center">
         <div className=
-          "relative flex mx-3 h-[64px] w-[64px] rounded-3xl overflow-hidden bg-primary/10 text-primary"
+          "relative flex mx-3 h-[64px] w-[64px] rounded-3xl overflow-hidden bg-primary/10 text-primary transition"
         >
           <Image
             fill
