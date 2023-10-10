@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSearch } from "@/components/server/server-search";
 import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 import { ServerImage } from "@/components/server/server-image";
+import { ServerToolbar } from "./server-toolbar";
 
 interface ServerSidebarProps {
     serverId: string;
@@ -82,9 +83,15 @@ export const ServerSidebar = async ({
                     role={role}
                 /> 
             </div>
-            <div className="flex-3" style={{flex: 2}}>
+            <div className="flex-3" style={{flex: 1.25}}>
+                <ServerToolbar 
+                    server={server}
+                    role={role}
+                /> 
+            </div>
+            <div className="flex-4" style={{flex: 0.75}}>
                 <ScrollArea className="flex-1 px-3">
-                    <div className="mt-2">
+                    <div className="mt-3">
                         <ServerSearch 
                             data={[
                                 {
