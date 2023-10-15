@@ -15,6 +15,13 @@ import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+/**
+ * DeleteServerModal function component.
+ *
+ * Renders the modal dialog for confirming the deletion of a server.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const DeleteServerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
@@ -24,6 +31,9 @@ export const DeleteServerModal = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+   * Handles the confirmation click to delete a server.
+   */
   const onClick = async () => {
     try {
       setIsLoading(true);

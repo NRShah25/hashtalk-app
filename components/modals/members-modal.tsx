@@ -2,18 +2,10 @@
 
 import axios from "axios";
 import qs from "query-string";
-import { 
-  Check,
-  Gavel,
-  Loader2,
-  MoreVertical, 
-  Shield, 
-  ShieldAlert, 
-  ShieldCheck,
-  ShieldQuestion
-} from "lucide-react";
 import { useState } from "react";
+
 import { MemberRole } from "@prisma/client";
+import { ServerWithMembersWithProfiles } from "@/types";
 import { useRouter } from "next/navigation";
 
 import {
@@ -24,9 +16,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useModal } from "@/hooks/use-modal-store";
-import { ServerWithMembersWithProfiles } from "@/types";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { UserAvatar } from "@/components/user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,6 +27,18 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { UserAvatar } from "@/components/user-avatar";
+import { 
+  Check,
+  Gavel,
+  Loader2,
+  MoreVertical, 
+  Shield, 
+  ShieldAlert, 
+  ShieldCheck,
+  ShieldQuestion
+} from "lucide-react";
 
 const roleIconMap = {
   "GUEST": null,
@@ -45,6 +46,13 @@ const roleIconMap = {
   "ADMIN": <ShieldAlert className="h-4 w-4 text-rose-500" />
 }
 
+/**
+ * MembersModal function component.
+ *
+ * Renders the members management modal.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const MembersModal = () => {
   const router = useRouter();
   const { onOpen, isOpen, onClose, type, data } = useModal();
@@ -53,6 +61,13 @@ export const MembersModal = () => {
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfiles };
 
+
+  /**
+   * Handles the member kicking process.
+   * Makes a request to kick a specific member from the server.
+   *
+   * @param memberId - The ID of the member to be kicked.
+   */
   const onKick = async (memberId: string) => {
     try {
       setLoadingId(memberId);
@@ -74,6 +89,13 @@ export const MembersModal = () => {
     }
   }
 
+  /**
+   * Handles the role changing process for members.
+   * Makes a request to change the role of a specific member in the server.
+   *
+   * @param memberId - The ID of the member whose role is to be changed.
+   * @param role - The new role to be assigned.
+   */
   const onRoleChange = async (memberId: string, role: MemberRole) => {
     try {
       setLoadingId(memberId);

@@ -15,7 +15,15 @@ import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
+/**
+ * LeaveServerModal function component.
+ *
+ * Renders the confirmation modal for users who attempt to leave a server.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 export const LeaveServerModal = () => {
+
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
 
@@ -24,6 +32,10 @@ export const LeaveServerModal = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+   * Handles the server leaving process.
+   * On confirmation, it makes a request to leave the server and then redirects to the home page.
+   */
   const onClick = async () => {
     try {
       setIsLoading(true);

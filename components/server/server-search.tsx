@@ -57,7 +57,7 @@ export const ServerSearch = ({
             >
                 <Search className = "w-4 h-4 text-zinc-500 dark:text-zinc-400" />
                 <p
-                    className = "font-semibold text-sm text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition"
+                    className = "font-semibold text-m text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition"
                 >
                     Search
                 </p>
@@ -81,7 +81,6 @@ export const ServerSearch = ({
                                         </CommandItem>
                                     )
                                 })}
-
                             </CommandGroup>
                         )
                     })}
