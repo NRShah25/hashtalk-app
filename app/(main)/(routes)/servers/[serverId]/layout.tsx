@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { ServerSidebar } from "@/components/server/server-sidebar";
+import { ServerTopbar } from "@/components/server/server-topbar";
 
 interface ServerIdLayoutProps {
   children: React.ReactNode; 
@@ -64,14 +65,15 @@ const ServerIdLayout: React.FC<ServerIdLayoutProps> = async ({ children, params 
     return null;
   }
 
-  return (
-      <div className="flex flex-col h-screen">
-        <div className="hidden md:flex h-16 z-20 fixed inset-x-0">
-          <ServerSidebar serverId={params.serverId} />
-        </div>
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+
+  return ( 
+    <div className="h-full">
+      <div className="hidden md:flex h-20 z-20 fixed inset-x-0">
+        <ServerTopbar serverId={params.serverId} />
+      </div>
+      <div 
+      className="mt-36 hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
+        <ServerSidebar serverId={params.serverId} />
       </div>
   );
 }
