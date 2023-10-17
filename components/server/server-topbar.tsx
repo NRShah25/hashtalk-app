@@ -10,6 +10,7 @@ import { ServerSearch } from "@/components/server/server-search";
 import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 import { ServerImage } from "@/components/server/server-image";
 import { ServerToolbar } from "./server-toolbar";
+import { ChatHeader } from "../chat/chat-header";
 
 interface ServerTopbarProps {
     serverId: string;
@@ -83,7 +84,7 @@ export const ServerTopbar = async ({
                     role={role}
                 /> 
             </div>
-            <div className="flex-3" style={{flex: 1.25}}>
+            <div className="flex-4" style={{flex: 1.25}}>
                 <ServerToolbar 
                     server={server}
                     role={role}
