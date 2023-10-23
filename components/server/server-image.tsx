@@ -16,20 +16,20 @@ export const ServerImage = ({
   imageUrl,
   name
 }: ServerImageProps) => {
-  const params = useParams();
-  const router = useRouter();
+    const params = useParams();
+    const router = useRouter();
 
-  return (
-      <div className="relative flex items-center">
-        <div className=
-          "relative flex mx-3 h-[64px] w-[64px] rounded-3xl overflow-hidden bg-primary/10 text-primary transition"
-        >
-          <Image
-            fill
-            src={imageUrl}
-            alt={name}
-          />
+    return (
+        <div className="relative flex items-center">
+            <div className=
+                     "relative flex mx-3 h-[64px] w-[64px] rounded-3xl overflow-hidden bg-primary/10 text-primary transition"
+            >
+                <Image
+                    fill
+                    src={imageUrl}
+                    alt={name}
+                />
+            </div>
         </div>
-      </div>
-  );
-
+    );
+}
