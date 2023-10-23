@@ -32,5 +32,4 @@ export const ServerImage = ({
         </div>
       </div>
   );
-}
 
