@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { ServerHeader } from "@/components/server/server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSearch } from "./server-search";
-import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
+import { Hash, Mic, Star, Video } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ServerSection } from "./server-section";
 import { ServerChannel } from "./server-channel";
@@ -25,8 +25,8 @@ const iconMap = {
 
 const roleIconMap = {
     [MemberRole.GUEST]: null,
-    [MemberRole.MODERATOR]: <ShieldCheck className = "h-4 w-4 mr-2 text-indigo-500" />,
-    [MemberRole.ADMIN]: <ShieldAlert className = "h-4 w-4 mr-2 text-rose-500" />
+    [MemberRole.MODERATOR]: <Star className = "h-4 w-4 mr-2 fill-current text-gray-300" />,
+    [MemberRole.ADMIN]: <Star className = "h-4 w-4 mr-2 fill-current text-yellow-500" />
 }
 
 export const ServerSidebar = async ({
