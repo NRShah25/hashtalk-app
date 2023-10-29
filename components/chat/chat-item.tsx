@@ -6,7 +6,7 @@ import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Member, MemberRole, Profile } from "@prisma/client";
-import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
+import { Edit, FileIcon, Star, Trash } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
@@ -41,8 +41,8 @@ interface ChatItemProps {
 
 const roleIconMap = {
   "GUEST": null,
-  "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
-  "ADMIN": <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
+  "MODERATOR": <Star className="h-4 w-4 ml-2 fill-current text-gray-300" />,
+  "ADMIN": <Star className="h-4 w-4 ml-2 fill-current text-yellow-500" />,
 }
 
 const formSchema = z.object({
