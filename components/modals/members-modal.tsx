@@ -7,10 +7,7 @@ import {
   Gavel,
   Loader2,
   MoreVertical, 
-  Shield, 
-  ShieldAlert, 
-  ShieldCheck,
-  ShieldQuestion
+  Star
 } from "lucide-react";
 import { useState } from "react";
 import { MemberRole } from "@prisma/client";
@@ -41,8 +38,8 @@ import {
 
 const roleIconMap = {
   "GUEST": null,
-  "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
-  "ADMIN": <ShieldAlert className="h-4 w-4 text-rose-500" />
+  "MODERATOR": <Star className="h-4 w-4 ml-2 fill-current text-gray-300" />,
+  "ADMIN": <Star className="h-4 w-4 ml-2 fill-current text-yellow-500" />,
 }
 
 export const MembersModal = () => {
@@ -132,7 +129,7 @@ export const MembersModal = () => {
                         <DropdownMenuSubTrigger
                           className="flex items-center"
                         >
-                          <ShieldQuestion
+                          <Star
                             className="w-4 h-4 mr-2"
                           />
                           <span>Role</span>
@@ -142,7 +139,7 @@ export const MembersModal = () => {
                             <DropdownMenuItem
                               onClick={() => onRoleChange(member.id, "GUEST")}
                             >
-                              <Shield className="h-4 w-4 mr-2" />
+                              <div className="h-4 w-4 mr-2" />
                               Guest
                               {member.role === "GUEST" && (
                                 <Check
@@ -153,7 +150,7 @@ export const MembersModal = () => {
                             <DropdownMenuItem
                               onClick={() => onRoleChange(member.id, "MODERATOR")}
                             >
-                              <ShieldCheck className="h-4 w-4 mr-2" />
+                              <Star className="h-4 w-4 ml-auto fill-current text-gray-300" />
                               Moderator
                               {member.role === "MODERATOR" && (
                                 <Check
