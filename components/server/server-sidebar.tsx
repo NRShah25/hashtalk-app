@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { ServerHeader } from "@/components/server/server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSearch } from "./server-search";
-import { Hash, Mic, Star, Video } from "lucide-react";
+import { MessagesSquare, Mic, Star, Video } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ServerSection } from "./server-section";
 import { ServerChannel } from "./server-channel";
@@ -18,7 +18,7 @@ interface ServerSidebarProps {
 }
 
 const iconMap = {
-    [ChannelType.TEXT]: <Hash className = "mr-2 h-4 w-4" />,
+    [ChannelType.TEXT]: <MessagesSquare className = "mr-2 h-4 w-4" />,
     [ChannelType.AUDIO]: <Mic className = "mr-2 h-4 w-4" />,
     [ChannelType.VIDEO]: <Video className = "mr-2 h-4 w-4" />
 };
