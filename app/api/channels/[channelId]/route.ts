@@ -1,8 +1,28 @@
+/**
+ * @module route.ts
+ * @description This module provides API route handlers for specific channel operations.
+ * @requires @/lib/current-profile
+ * @requires next/server
+ * @requires @/lib/db
+ * @requires @prisma/client
+ */
+
 import { currentProfile } from "@/lib/current-profile";
 import { NextResponse } from "next/server";
 import {db } from "@/lib/db";
 import { MemberRole } from "@prisma/client";
 
+/**
+ * Deletes a specified channel by its channelId.
+ * 
+ * This function doesn't allow deletion of a channel named "general".
+ * The user must be either an Admin or Moderator to delete a channel.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Object} params - The parameters passed to the route.
+ * @param {string} params.channelId - The ID of the channel.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response of the operation.
+ */
 export async function DELETE(
     req: Request,
     { params }: { params: {channelId: string } }
@@ -57,6 +77,18 @@ export async function DELETE(
     }
 }
 
+
+/**
+ * Updates the details of a specified channel by its channelId.
+ * 
+ * This function doesn't allow updates to a channel named "general".
+ * The user must be either an ADMIN or MODERATOR to update a channel.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Object} params - The parameters passed to the route.
+ * @param {string} params.channelId - The ID of the channel.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response of the operation.
+ */
 export async function PATCH(
     req: Request,
     { params }: { params: {channelId: string } }
