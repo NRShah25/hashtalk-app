@@ -1,12 +1,32 @@
+/**
+ * @module route.ts
+ * @description This module provides API route handlers for specific member operations within a server.
+ * @requires next/server
+ * @requires @/lib/current-profile
+ * @requires @/lib/db
+ */
+
 import { NextResponse } from "next/server";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
+
+/**
+ * Removes a specified member from a server by their memberId.
+ * 
+ * This function handles the DELETE request to remove a member.
+ * The logged-in user must be a member of the server to execute this action.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Object} params - The parameters passed to the route.
+ * @param {string} params.memberId - The ID of the member.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response of the operation.
+ */
 export async function DELETE(
   req: Request,
   { params }: { params: { memberId: string } }
-) {
+): Promise<NextResponse> {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
@@ -59,10 +79,21 @@ export async function DELETE(
   }
 }
 
+/**
+ * Updates the role of a specified member in a server by their memberId.
+ * 
+ * This function handles the PATCH request to update a member's role.
+ * The logged-in user must be a member of the server to execute this action.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Object} params - The parameters passed to the route.
+ * @param {string} params.memberId - The ID of the member.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response of the operation.
+ */
 export async function PATCH(
   req: Request,
   { params }: { params: { memberId: string } }
-) {
+): Promise<NextResponse> {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
