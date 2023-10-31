@@ -1,13 +1,31 @@
+/**
+ * @module route.ts
+ * @description This module provides an API route handler for fetching direct messages within a conversation.
+ * @requires @/lib/current-profile
+ * @requires next/server
+ * @requires @/lib/db
+ * @requires @prisma/client
+ */
+
 import { currentProfile } from "@/lib/current-profile";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { DirectMessage, Message } from "@prisma/client";
+import { DirectMessage } from "@prisma/client";
 
+/** The batch size for paginated message retrieval. */
 const MESSAGES_BATCH = 10;
 
-export async function GET(
-    req: Request
-) {
+/**
+ * Fetches direct messages from a specified conversation.
+ * 
+ * This function handles the GET request to retrieve direct messages.
+ * It supports optional pagination using a cursor, returning a batch of messages with a provided size.
+ * The retrieved messages are ordered by their creation date in descending order.
+ * 
+ * @param {Request} req - The request object.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response of the operation.
+ */
+export async function GET(req: Request): Promise<NextResponse> {
     try {
         const profile = await currentProfile();
         const { searchParams } = new URL(req.url);
