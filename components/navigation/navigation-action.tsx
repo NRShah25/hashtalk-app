@@ -1,32 +1,63 @@
 "use client";
 
-import { Plus } from "lucide-react";
+/**
+ * @module navigation-action.tsx
+ * @description This module provides a component to display an action button for adding servers.
+ * @requires lucide-react
+ * @requires @/components/action-tooltip
+ * @requires @/hooks/use-modal-store
+ */
 
+import { Home, Search } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
+/**
+ * Represents a button action to add servers.
+ * 
+ * This component displays a button with a plus icon, which allows users to add a server.
+ * Clicking the button opens a modal dialog for server creation. The button also includes a tooltip for user guidance.
+ * 
+ * @returns {React.ReactNode} Returns the action button with associated tooltip.
+ */
 export const NavigationAction = () => {
-  const { onOpen } = useModal();
+    const { onOpen } = useModal();
 
-  return (
-    <div>
-      <ActionTooltip
-        side="right"
-        align="center"
-        label="Add a server"
-      >
-        <button
-          onClick={() => onOpen("createServer")}
-          className="group flex items-center"
-        >
-          <div className="flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden items-center justify-center bg-background dark:bg-neutral-700 group-hover:bg-emerald-500">
-            <Plus
-              className="group-hover:text-white transition text-emerald-500"
-              size={25}
-            />
-          </div>
-        </button>
-      </ActionTooltip>
-    </div>
-  )
+    return (
+        <div>
+            <ActionTooltip
+                side="right"
+                align="center"
+                label="Home"
+            >
+                <button
+                    onClick={() => onOpen("createServer")}
+                    className="group flex items-center"
+                >
+                    <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
+                        <Home
+                            className="group-hover:text-white transition text-zinc-500 dark:text-zinc-400"
+                            size={25}
+                        />
+                    </div>
+                </button>
+            </ActionTooltip>
+            <ActionTooltip
+                side="right"
+                align="center"
+                label="Search"
+            >
+                <button
+                    className="group flex items-center"
+                >
+                    <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
+                        <Search
+                            className="group-hover:text-white transition text-zinc-500 dark:text-zinc-400"
+                            size={25}
+                        />
+                    </div>
+                </button>
+            </ActionTooltip>
+        </div>
+    );
 }
