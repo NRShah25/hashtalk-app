@@ -1,13 +1,31 @@
+/**
+ * @module route.ts
+ * @description This module provides an API route handler for fetching messages from a specific channel.
+ * @requires @/lib/current-profile
+ * @requires next/server
+ * @requires @/lib/db
+ * @requires @prisma/client
+ */
+
 import { currentProfile } from "@/lib/current-profile";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { Message } from "@prisma/client";
+import { db } from "@/lib/db";
 
-const MESSAGES_BATCH = 10;
+/** The batch size for paginated message retrieval. */
+const MESSAGES_BATCH = 12;
 
-export async function GET(
-    req: Request
-) {
+/**
+ * Fetches messages from a specified channel.
+ * 
+ * This function handles the GET request to retrieve messages from a channel.
+ * It supports optional pagination using a cursor, returning a batch of messages with a provided size.
+ * The retrieved messages are ordered by their creation date in descending order and include member profile details.
+ * 
+ * @param {Request} req - The request object.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response of the operation.
+ */
+export async function GET(req: Request): Promise<NextResponse> {
     try {
         const profile = await currentProfile();
         const { searchParams } = new URL(req.url);
