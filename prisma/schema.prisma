@@ -152,19 +152,3 @@ model DirectMessage {
   @@index([memberId])
   @@index([conversationId])
 }
-
-model Friendship {
-  id String @id @default(uuid())
-
-  profileOneId String
-  profileOne Profile @relation("ProfileOne", fields: [profileOneId], references: [id], onDelete: Cascade)
-
-  profileTwoId String
-  profileTwo Profile @relation("ProfileTwo", fields: [profileTwoId], references: [id], onDelete: Cascade)
-
-  directMessages DirectMessage[]
-
-  @@index([profileTwoId])
-
-  @@unique([profileOneId, profileTwoId])
-}
