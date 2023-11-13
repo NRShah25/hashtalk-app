@@ -18,7 +18,7 @@ import { db } from "@/lib/db";
  * Creates a new server with the provided details.
  * 
  * This function handles the POST request to create a new server.
- * It generates a unique invite code for the server, creates a default "general" channel,
+ * It generates a unique invite code for the server, creates a default "home" channel,
  * and adds the logged-in user to the server as an admin.
  * 
  * @param {Request} req - The request object containing server details.
@@ -41,7 +41,7 @@ export async function POST(req: Request): Promise<NextResponse> {
                 inviteCode: uuidv4(),
                 channels: {
                     create: [
-                        { name: "general", profileId: profile.id }
+                        { name: "home", profileId: profile.id }
                     ]
                 },
                 members: {
