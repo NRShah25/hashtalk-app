@@ -15,7 +15,7 @@ import { MemberRole } from "@prisma/client";
 /**
  * Deletes a specified channel by its channelId.
  * 
- * This function doesn't allow deletion of a channel named "general".
+ * This function doesn't allow deletion of a channel named "home".
  * The user must be either an Admin or Moderator to delete a channel.
  * 
  * @param {Request} req - The request object.
@@ -62,7 +62,7 @@ export async function DELETE(
                     delete: {
                         id: params.channelId,
                         name: {
-                            not: "general",
+                            not: "home",
                         }
                     }
                 }
@@ -81,7 +81,7 @@ export async function DELETE(
 /**
  * Updates the details of a specified channel by its channelId.
  * 
- * This function doesn't allow updates to a channel named "general".
+ * This function doesn't allow updates to a channel named "home".
  * The user must be either an ADMIN or MODERATOR to update a channel.
  * 
  * @param {Request} req - The request object.
@@ -112,8 +112,8 @@ export async function PATCH(
             return new NextResponse("Channel ID missing", { status: 400 });
         }
 
-        if (name === "general") {
-            return new NextResponse("Name cannot be 'general'", {
+        if (name === "home") {
+            return new NextResponse("Name cannot be 'home'", {
                 status: 400
             });
         }
@@ -136,7 +136,7 @@ export async function PATCH(
                         where: {
                             id: params.channelId,
                             NOT: {
-                                name: "general",
+                                name: "home",
                             },
                         },
                         data: {
