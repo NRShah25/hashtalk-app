@@ -38,8 +38,8 @@ export async function POST(req: Request): Promise<NextResponse> {
             return new NextResponse("Server ID missing", { status: 400 });
         }
 
-        if (name === "general") {
-            return new NextResponse("Name cannot be 'general'", { status: 400 });
+        if (name === "home") {
+            return new NextResponse("Name cannot be 'home'", { status: 400 });
         }
 
         const server = await db.server.update({
