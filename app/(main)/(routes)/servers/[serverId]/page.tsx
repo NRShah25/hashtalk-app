@@ -54,7 +54,7 @@ const ServerIdPage = async ({
         include: {
             channels: {
                 where: {
-                    name: "general"
+                    name: "home"
                 },
                 orderBy: {
                     createdAt: "asc"
@@ -65,7 +65,7 @@ const ServerIdPage = async ({
 
     const initialChannel = server?.channels[0];
 
-    if (initialChannel?.name !== "general") {
+    if (initialChannel?.name !== "home") {
         return null;
     }
 
