@@ -43,7 +43,7 @@ export async function GET(): Promise<NextResponse> {
  */
 export async function POST(req: Request): Promise<NextResponse> {
     try {
-        const { name, description, imageUrl } = await req.json();
+        const { name, description, accessLevel, imageUrl } = await req.json();
         const profile = await currentProfile();
 
         if (!profile) {
@@ -55,6 +55,7 @@ export async function POST(req: Request): Promise<NextResponse> {
                 profileId: profile.id,
                 name,
                 description,
+                accessLevel,
                 imageUrl,
                 inviteCode: uuidv4(),
                 channels: {
