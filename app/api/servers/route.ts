@@ -14,6 +14,16 @@ import { MemberRole } from "@prisma/client";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
+export async function GET(): Promise<NextResponse> {
+    try {
+        const servers = await db.server.findMany();
+        return NextResponse.json(servers);
+    } catch (error) {
+        console.log("[SERVERS_GET]", error);
+        return new NextResponse("Internal Error", { status: 500 });
+    }
+}
+
 /**
  * Creates a new server with the provided details.
  * 
@@ -26,7 +36,7 @@ import { db } from "@/lib/db";
  */
 export async function POST(req: Request): Promise<NextResponse> {
     try {
-        const { name, imageUrl } = await req.json();
+        const { name, description, imageUrl } = await req.json();
         const profile = await currentProfile();
 
         if (!profile) {
@@ -37,6 +47,7 @@ export async function POST(req: Request): Promise<NextResponse> {
             data: {
                 profileId: profile.id,
                 name,
+                description,
                 imageUrl,
                 inviteCode: uuidv4(),
                 channels: {
