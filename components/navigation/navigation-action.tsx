@@ -48,6 +48,7 @@ export const NavigationAction = () => {
                 label="Search"
             >
                 <button
+                    onClick={() => onOpen("search")}
                     className="group flex items-center"
                 >
                     <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
