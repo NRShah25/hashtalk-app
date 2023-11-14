@@ -21,6 +21,8 @@ type Server = {
   profileId: string;
   createdAt: Date;
   updatedAt: Date;
+
+  _count: { members: number };
 };
 
 export const SearchModal = () => {
@@ -54,19 +56,15 @@ export const SearchModal = () => {
         </DialogHeader>
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
           {servers.map((server) => (
-            <div key = {server.id} className = "flex items-center gap-x-2 mb-6">
-              <ServerAvatar src = {server.imageUrl} />
-              <div className = "flex flex-col gap-y-1">
-                <div className = "text-xl font-semibold flex items-center">
-                  <Hash/>
-                  {server.name}
+            <div key={server.id} className="flex items-center gap-x-2 mb-6">
+              <ServerAvatar src={server.imageUrl} />
+              <div className="flex flex-col gap-y-1">
+                <div className="font-semibold text-s flex items-baseline">
+                  <span className="font-bold">{server.name}</span>
+                  <span className="mx-2">•</span>
+                  <span> {server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
                 </div>
-                <div className = "text-xs flex items-center">
-                  {server.description}
-                </div>
-                <p>
-                  Member Count
-                </p>
+                <span className = "text-xs">{server.description}</span>
               </div>
             </div>
           ))}
