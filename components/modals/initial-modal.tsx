@@ -1,164 +1,104 @@
 "use client";
 
-import axios from "axios";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { FileUpload } from "@/components/file-upload";
+import { useEffect, useState } from "react";
+import { ScrollArea } from "../ui/scroll-area";
+import { ServerAvatar } from "../server-avatar";
+import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
-const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required."
-  }),
-  description: z.string().min(1, {
-    message: "Server description is required."
-  }),
-  imageUrl: z.string().min(1, {
-    message: "Server image is required."
-  })
-});
+type Server = {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  inviteCode: string;
+  profileId: string;
+  createdAt: Date;
+  updatedAt: Date;
+
+  _count: { members: number };
+};
 
 export const InitialModal = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
   const router = useRouter();
+  const [servers, setServers] = useState<Server[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
-
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      imageUrl: "",
-    }
-  });
-
-  const isLoading = form.formState.isSubmitting;
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const fetchServers = async () => {
     try {
-      await axios.post("/api/servers", values);
+      const response = await fetch('/api/servers');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      let serverList: Server[] = await response.json();
 
-      form.reset();
-      router.refresh();
-      window.location.reload();
+      serverList.sort((a, b) => b._count.members - a._count.members);
+
+      setServers(serverList);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching servers:', error);
     }
-  }
+};
 
-  if (!isMounted) {
-    return null;
-  }
+fetchServers();
 
-  return (
-    <Dialog open>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden">
-        <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
-            Customize your server
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
-            Give your server a personality with a name and an image. You can always change it later.
-          </DialogDescription>
-        </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="space-y-8 px-6">
-              <div className="flex items-center justify-center text-center">
-                <FormField
-                  control={form.control}
-                  name="imageUrl"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint="serverImage"
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
+}, []);
+
+const handleJoinServer = async (serverId: string) => {
+  try {
+    const response = await axios.post(`/api/servers/${serverId}/join`);
+    
+    if (response.status === 200) {
+      router.push(`/servers/${serverId}`);
+    } else {
+      console.error('Server join was unsuccessful:', response.data.message);
+    }
+  } catch (error) {
+    console.error('Error joining server:', error);
+  }
+};
+
+
+return (
+  <Dialog open>
+    <DialogContent className="bg-white text-black overflow-hidden">
+      <DialogHeader className="pt-8 px-6">
+        <DialogTitle className="text-2xl text-center font-bold">Welcome to #talk!</DialogTitle>
+        <DialogDescription className="text-center text-zinc-500">
+            Pick a server to join and start the conversation!
+        </DialogDescription>
+      </DialogHeader>
+      <ScrollArea className="mt-8 max-h-[420px] pr-6">
+        {servers.map((server) => (
+          <div key={server.id} className="flex items-center justify-between gap-x-2 mb-6">
+            <div className="flex items-center gap-x-2">
+              <ServerAvatar src={server.imageUrl} />
+              <div className="flex flex-col gap-y-1">
+                <div className="font-semibold text-s flex items-baseline">
+                  <span className="font-bold">{server.name}</span>
+                  <span className="mx-2">•</span>
+                  <span> {server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
+                </div>
+                <span className="text-xs">{server.description}</span>
               </div>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
-                      Server name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                        placeholder="Enter server name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
-                      Description
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                        placeholder="Enter a short description"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button variant="primary" disabled={isLoading}>
-                Create
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
-  )
-}
+            <Button onClick={() => handleJoinServer(server.id)}>
+              Join
+            </Button>
+          </div>
+        ))}
+      </ScrollArea>
+    </DialogContent>
+  </Dialog>
+  );
+};
