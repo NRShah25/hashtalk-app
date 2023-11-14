@@ -63,7 +63,7 @@ export async function PATCH(
 ): Promise<NextResponse> {
   try {
     const profile = await currentProfile();
-    const { name, imageUrl } = await req.json();
+    const { name, description, imageUrl } = await req.json();
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -76,6 +76,7 @@ export async function PATCH(
       },
       data: {
         name,
+        description,
         imageUrl,
       }
     });
