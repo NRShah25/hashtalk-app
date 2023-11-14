@@ -10,6 +10,8 @@ import { useModal } from "@/hooks/use-modal-store";
 import { useEffect, useState } from "react";
 import { ScrollArea } from "../ui/scroll-area";
 import { ServerAvatar } from "../server-avatar";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 type Server = {
   id: string;
@@ -27,10 +29,12 @@ type Server = {
 export const ExploreModal = () => {
   const { isOpen, onClose, type } = useModal();
   const isModalOpen = isOpen && type === "explore";
-
+  const router = useRouter();
   const [servers, setServers] = useState<Server[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
   const fetchServers = async () => {
     try {
       const response = await fetch('/api/servers');
@@ -50,16 +54,23 @@ export const ExploreModal = () => {
 fetchServers();
 
 }, []);
-  
-  return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black overflow-hidden">
-        <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">Explore</DialogTitle>
-        </DialogHeader>
-        <ScrollArea className="mt-8 max-h-[420px] pr-6">
-          {servers.map((server) => (
-            <div key={server.id} className="flex items-center gap-x-2 mb-6">
+
+const handleJoinServer = (serverId: string) => {
+  if (isMounted) {
+    router.push(`/servers/${serverId}`);
+  }
+};
+
+return (
+  <Dialog open={isModalOpen} onOpenChange={onClose}>
+    <DialogContent className="bg-white text-black overflow-hidden">
+      <DialogHeader className="pt-8 px-6">
+        <DialogTitle className="text-2xl text-center font-bold">Explore</DialogTitle>
+      </DialogHeader>
+      <ScrollArea className="mt-8 max-h-[420px] pr-6">
+        {servers.map((server) => (
+          <div key={server.id} className="flex items-center justify-between gap-x-2 mb-6">
+            <div className="flex items-center gap-x-2">
               <ServerAvatar src={server.imageUrl} />
               <div className="flex flex-col gap-y-1">
                 <div className="font-semibold text-s flex items-baseline">
@@ -67,12 +78,16 @@ fetchServers();
                   <span className="mx-2">•</span>
                   <span> {server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
                 </div>
-                <span className = "text-xs">{server.description}</span>
+                <span className="text-xs">{server.description}</span>
               </div>
             </div>
-          ))}
-        </ScrollArea>
-      </DialogContent>
-    </Dialog>
-  );
+            <Button>
+              Join
+            </Button>
+          </div>
+        ))}
+      </ScrollArea>
+    </DialogContent>
+  </Dialog>
+);
 };
