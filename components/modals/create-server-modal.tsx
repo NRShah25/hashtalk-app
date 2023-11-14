@@ -100,7 +100,6 @@ export const CreateServerModal = () => {
                   )}
                 />
               </div>
-
               <FormField
                 control={form.control}
                 name="name"
