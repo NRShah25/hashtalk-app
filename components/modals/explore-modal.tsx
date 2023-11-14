@@ -18,6 +18,7 @@ type Server = {
   id: string;
   name: string;
   description: string;
+  accessLevel: 'PUBLIC' | 'PRIVATE';
   imageUrl: string;
   inviteCode: string;
   profileId: string;
@@ -36,21 +37,25 @@ export const ExploreModal = () => {
 
   useEffect(() => {
     setIsMounted(true);
-  const fetchServers = async () => {
-    try {
-      const response = await fetch('/api/servers');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+
+    const fetchServers = async () => {
+      try {
+        const response = await fetch('/api/servers');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let serverList: Server[] = await response.json();
+    
+        serverList = serverList.filter(server => server.accessLevel === 'PUBLIC');
+    
+        serverList.sort((a, b) => b._count.members - a._count.members);
+    
+        setServers(serverList);
+      } catch (error) {
+        console.error('Error fetching servers:', error);
       }
-      let serverList: Server[] = await response.json();
-
-      serverList.sort((a, b) => b._count.members - a._count.members);
-
-      setServers(serverList);
-    } catch (error) {
-      console.error('Error fetching servers:', error);
-    }
-};
+    };
+    
 
 fetchServers();
 
