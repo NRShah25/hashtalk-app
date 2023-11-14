@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { initialProfile } from "@/lib/initial-profile";
 import { InitialModal } from "@/components/modals/initial-modal";
+import { ExploreModal } from "@/components/modals/explore-modal";
 
 /**
  * SetupPage is an async component responsible for the initial setup of users.
