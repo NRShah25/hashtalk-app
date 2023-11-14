@@ -31,6 +31,9 @@ const formSchema = z.object({
   name: z.string().min(1, {
     message: "Server name is required."
   }),
+  description: z.string().min(1, {
+    message: "Server description is required."
+  }),
   imageUrl: z.string().min(1, {
     message: "Server image is required."
   })
@@ -49,6 +52,7 @@ export const InitialModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      description: "",
       imageUrl: "",
     }
   });
@@ -102,7 +106,6 @@ export const InitialModal = () => {
                   )}
                 />
               </div>
-
               <FormField
                 control={form.control}
                 name="name"
@@ -118,6 +121,28 @@ export const InitialModal = () => {
                         disabled={isLoading}
                         className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                         placeholder="Enter server name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel
+                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                    >
+                      Description
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isLoading}
+                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        placeholder="Enter a short description"
                         {...field}
                       />
                     </FormControl>
