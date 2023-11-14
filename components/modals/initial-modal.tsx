@@ -18,6 +18,7 @@ type Server = {
   id: string;
   name: string;
   description: string;
+  accessLevel: 'PUBLIC' | 'PRIVATE';
   imageUrl: string;
   inviteCode: string;
   profileId: string;
@@ -41,6 +42,8 @@ export const InitialModal = () => {
         throw new Error('Network response was not ok');
       }
       let serverList: Server[] = await response.json();
+
+      serverList = serverList.filter(server => server.accessLevel === 'PUBLIC');
 
       serverList.sort((a, b) => b._count.members - a._count.members);
 
