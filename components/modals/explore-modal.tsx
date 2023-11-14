@@ -12,6 +12,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { ServerAvatar } from "../server-avatar";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 type Server = {
   id: string;
@@ -55,9 +56,17 @@ fetchServers();
 
 }, []);
 
-const handleJoinServer = (serverId: string) => {
-  if (isMounted) {
-    router.push(`/servers/${serverId}`);
+const handleJoinServer = async (serverId: string) => {
+  try {
+    const response = await axios.post(`/api/servers/${serverId}/join`);
+    
+    if (response.status === 200) {
+      router.push(`/servers/${serverId}`);
+    } else {
+      console.error('Server join was unsuccessful:', response.data.message);
+    }
+  } catch (error) {
+    console.error('Error joining server:', error);
   }
 };
 
@@ -81,7 +90,7 @@ return (
                 <span className="text-xs">{server.description}</span>
               </div>
             </div>
-            <Button>
+            <Button onClick={() => handleJoinServer(server.id)}>
               Join
             </Button>
           </div>
