@@ -16,13 +16,20 @@ import { db } from "@/lib/db";
 
 export async function GET(): Promise<NextResponse> {
     try {
-        const servers = await db.server.findMany();
+        const servers = await db.server.findMany({
+            include: {
+                _count: {
+                    select: { members: true }
+                }
+            }
+        });
         return NextResponse.json(servers);
     } catch (error) {
         console.log("[SERVERS_GET]", error);
         return new NextResponse("Internal Error", { status: 500 });
     }
 }
+
 
 /**
  * Creates a new server with the provided details.
