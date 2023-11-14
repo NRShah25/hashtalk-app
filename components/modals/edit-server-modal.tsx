@@ -27,6 +27,12 @@ import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+
+const ServerAccessLevel = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE',
+};
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -34,6 +40,9 @@ const formSchema = z.object({
   }),
   description: z.string().min(1, {
     message: "Server description is required."
+  }),
+  accessLevel: z.enum([ServerAccessLevel.PUBLIC, ServerAccessLevel.PRIVATE]).refine(val => val === ServerAccessLevel.PUBLIC || val === ServerAccessLevel.PRIVATE, {
+    message: "Access level is required."
   }),
   imageUrl: z.string().min(1, {
     message: "Server image is required."
@@ -52,15 +61,19 @@ export const EditServerModal = () => {
     defaultValues: {
       name: "",
       description: "",
+      accessLevel: ServerAccessLevel.PUBLIC,
       imageUrl: "",
     }
   });
 
   useEffect(() => {
     if (server) {
-      form.setValue("name", server.name);
-      form.setValue("description", server.description);
-      form.setValue("imageUrl", server.imageUrl);
+      form.reset({
+        name: server.name,
+        description: server.description,
+        accessLevel: server.accessLevel || ServerAccessLevel.PUBLIC,
+        imageUrl: server.imageUrl,
+      });
     }
   }, [server, form]);
 
@@ -76,12 +89,12 @@ export const EditServerModal = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const handleClose = () => {
     form.reset();
     onClose();
-  }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -156,6 +169,44 @@ export const EditServerModal = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                        control={form.control}
+                        name="accessLevel"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormLabel 
+                              className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                            >
+                              Access level
+                            </FormLabel>
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={field.onChange}
+                                value={field.value}
+                                className="flex flex-col space-y-1"
+                              >
+                                <FormItem className="flex items-center space-x-3 space-y-0">
+                                  <FormControl>
+                                    <RadioGroupItem value="PUBLIC" />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    Public
+                                  </FormLabel>
+                                </FormItem>
+                                <FormItem className="flex items-center space-x-3 space-y-0">
+                                  <FormControl>
+                                    <RadioGroupItem value="PRIVATE" />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    Private
+                                  </FormLabel>
+                                </FormItem>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button variant="primary" disabled={isLoading}>
@@ -166,5 +217,5 @@ export const EditServerModal = () => {
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
