@@ -77,7 +77,6 @@ export const ExploreModal = () => {
         console.error('Error fetching profiles:', error);
       }
     };
-    
 
 fetchServers();
 fetchProfiles();
@@ -146,7 +145,7 @@ return (
                     </div>
                   </div>
                   <Button>
-                    Message
+                    View
                   </Button>
                 </div>
               ))}
