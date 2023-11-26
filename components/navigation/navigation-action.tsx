@@ -8,7 +8,7 @@
  * @requires @/hooks/use-modal-store
  */
 
-import { Compass, Home } from "lucide-react";
+import { Compass, PlusCircle, UserCircle } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
@@ -28,14 +28,14 @@ export const NavigationAction = () => {
             <ActionTooltip
                 side="right"
                 align="center"
-                label="Home"
+                label="Profile"
             >
                 <button
-                    onClick={() => onOpen("createServer")}
+                    onClick={() => onOpen("profile")}
                     className="group flex items-center"
                 >
                     <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
-                        <Home
+                        <UserCircle
                             className="group-hover:text-white transition text-zinc-500 dark:text-zinc-400"
                             size={25}
                         />
@@ -53,6 +53,23 @@ export const NavigationAction = () => {
                 >
                     <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
                         <Compass
+                            className="group-hover:text-white transition text-zinc-500 dark:text-zinc-400"
+                            size={25}
+                        />
+                    </div>
+                </button>
+            </ActionTooltip>
+            <ActionTooltip
+                side="right"
+                align="center"
+                label="Create Server"
+            >
+                <button
+                    onClick={() => onOpen("createServer")}
+                    className="group flex items-center"
+                >
+                    <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
+                        <PlusCircle
                             className="group-hover:text-white transition text-zinc-500 dark:text-zinc-400"
                             size={25}
                         />
