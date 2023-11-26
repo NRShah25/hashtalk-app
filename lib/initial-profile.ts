@@ -24,7 +24,10 @@ export const initialProfile = async () => {
       userId: user.id,
       username: user.username as string,
       imageUrl: user.imageUrl,
-      email: user.emailAddresses[0].emailAddress
+      email: user.emailAddresses[0].emailAddress,
+      displayName: user.username as string,
+      about: "",
+      status: ""
     }
   });
 
