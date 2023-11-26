@@ -30,7 +30,6 @@ export async function GET(): Promise<NextResponse> {
     }
 }
 
-
 /**
  * Creates a new server with the provided details.
  * 
