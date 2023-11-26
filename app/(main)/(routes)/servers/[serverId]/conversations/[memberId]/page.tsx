@@ -81,6 +81,7 @@ const MemberIdPage = async ({
                 name={otherMember.profile.username}
                 serverId={params.serverId}
                 type="conversation"
+                status={otherMember.profile.status}
             />
             <ChatMessages 
                 member={currentMember}
