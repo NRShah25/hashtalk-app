@@ -8,12 +8,22 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum ProfileAccessLevel {
+  PUBLIC
+  PRIVATE
+}
+
 model Profile {
   id String @id @default(uuid())
   userId String @unique
   username String
   imageUrl String @db.Text
   email String @db.Text
+  accessLevel ProfileAccessLevel@default(PUBLIC)
+
+  displayName String
+  about String
+  status String
 
   servers Server[]
   members Member[]
