@@ -14,6 +14,7 @@ import { EditChannelModal } from "../modals/edit-channel-modal";
 import { MessageFileModal } from "../modals/message-file-modal";
 import { DeleteMessageModal } from "../modals/delete-message-modal";
 import { ExploreModal } from "../modals/explore-modal";
+import { ProfileModal } from "../modals/profile-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -28,6 +29,7 @@ export const ModalProvider = () => {
 
   return (
     <>
+      <ProfileModal />
       <ExploreModal />
       <CreateServerModal />
       <InviteModal />
