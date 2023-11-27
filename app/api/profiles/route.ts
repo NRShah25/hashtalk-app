@@ -13,7 +13,13 @@ import { db } from "@/lib/db";
 
 export async function GET(): Promise<NextResponse> {
     try {
-        const profiles = await db.profile.findMany();
+        const profiles = await db.profile.findMany({
+            where: {
+                accessLevel: {
+                    not: 'PRIVATE'
+                }
+            }
+        });
         return NextResponse.json(profiles);
     } catch (error) {
         console.log("[PROFILES_GET]", error);
