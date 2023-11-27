@@ -40,9 +40,6 @@ export const ChatHeader = ({
                     {status}
                 </p>
             </div>
-            <div className="ml-auto flex items-center">
-                <SocketIndicator />
-            </div>
         </div>
     )
 }
