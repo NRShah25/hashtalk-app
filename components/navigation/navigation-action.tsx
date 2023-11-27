@@ -11,17 +11,22 @@
 import { Compass, PlusCircle, UserCircle } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
+import { Profile } from "@prisma/client";
 
-/**
- * Represents a button action to add servers.
- * 
- * This component displays a button with a plus icon, which allows users to add a server.
- * Clicking the button opens a modal dialog for server creation. The button also includes a tooltip for user guidance.
- * 
- * @returns {React.ReactNode} Returns the action button with associated tooltip.
- */
-export const NavigationAction = () => {
+interface NavigationActionProps {
+    profile: Profile;
+}
+
+export const NavigationAction = ({ profile }: NavigationActionProps) => {
     const { onOpen } = useModal();
+
+    const handleOpenProfileModal = () => {
+        if (profile) {
+            onOpen("profile", { profile });
+        } else {
+            console.log("Profile not loaded yet or no authenticated user.");
+        }
+    };
 
     return (
         <div>
@@ -31,7 +36,7 @@ export const NavigationAction = () => {
                 label="Profile"
             >
                 <button
-                    onClick={() => onOpen("profile")}
+                    onClick={handleOpenProfileModal}
                     className="group flex items-center"
                 >
                     <div className="flex mx-3 h-[48px] w-[48px] transition-all items-center justify-center">
