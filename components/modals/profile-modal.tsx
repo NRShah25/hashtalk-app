@@ -34,18 +34,22 @@ export const ProfileModal = ({ profileId }: ProfileModalProps) => {
 
   useEffect(() => {
     setIsMounted(true);
+    console.log("Attempting to fetch ", profileId); //Debugging
 
     const fetchProfile = async () => {
       if (!profileId) return;
+      console.log("Fetched ", profileId); // Debugging
 
       try {
-        const response = await fetch('/api/profiles/[profileId]');
+        const response = await fetch(`/api/profiles/${profileId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        let profile: Profile = await response.json();
+        let profile: Profile = await response.json();    
 
         setProfile(profile);
+        console.log('Profile state updated:', profile); // Debugging
+        
       } catch (error) {
         console.error('Error fetching profile:', error);
       }
@@ -60,12 +64,10 @@ fetchProfile();
       <DialogContent className="bg-white text-black overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            {profile?.username}
+              {profile?.username}
           </DialogTitle>
-          <DialogDescription 
-            className="text-center text-zinc-500"
-          >
-            {profile?.status}
+          <DialogDescription className="text-center text-zinc-500">
+              {profile?.status}
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
