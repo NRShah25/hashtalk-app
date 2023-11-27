@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Profile } from "@prisma/client";
 
 type Server = {
   id: string;
@@ -26,17 +27,8 @@ type Server = {
   _count: { members: number };
 };
 
-type Profile = {
-  id: string;
-  username: string;
-  imageUrl: string;
-
-  displayName: string;
-  about: string;
-}
-
 export const ExploreModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { onOpen, isOpen, onClose, type } = useModal();
   const isModalOpen = isOpen && type === "explore";
   const router = useRouter();
   const [servers, setServers] = useState<Server[]>([]);
@@ -98,6 +90,10 @@ const handleJoinServer = async (serverId: string) => {
   }
 };
 
+const handleViewProfile = (profile: Profile) => {
+  onOpen("profile", { profile });
+};
+
 return (
   <Dialog open={isModalOpen} onOpenChange={onClose}>
     <DialogContent className="bg-white text-black overflow-hidden">
@@ -144,7 +140,7 @@ return (
                       <span className="text-xs">{profile.about}</span>
                     </div>
                   </div>
-                  <Button>
+                  <Button onClick={() => handleViewProfile(profile)}>
                     View
                   </Button>
                 </div>
