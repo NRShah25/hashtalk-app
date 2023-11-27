@@ -1,6 +1,8 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Profile } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 import {
   Dialog,
@@ -11,67 +13,37 @@ import {
 } from "@/components/ui/dialog";
 import { useModal } from "@/hooks/use-modal-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { UserAvatar } from "../user-avatar";
 
-type Profile = {
-  id: string;
-  username: string;
-  imageUrl: string;
+export const ProfileModal = () => {
+  const router = useRouter();
+  const { onOpen, isOpen, onClose, type, data } = useModal();
+  const [loadingId, setLoadingId] = useState("");
 
-  displayName: string;
-  about: string;
-  status: string;
-}
-
-type ProfileModalProps = {
-  profileId: string;
-}
-
-export const ProfileModal = ({ profileId }: ProfileModalProps) => {
-  const { isOpen, onClose, type } = useModal();
   const isModalOpen = isOpen && type === "profile";
-  const [profile, setProfile] = useState<Profile>();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    console.log("Attempting to fetch ", profileId); //Debugging
-
-    const fetchProfile = async () => {
-      if (!profileId) return;
-      console.log("Fetched ", profileId); // Debugging
-
-      try {
-        const response = await fetch(`/api/profiles/${profileId}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        let profile: Profile = await response.json();    
-
-        setProfile(profile);
-        console.log('Profile state updated:', profile); // Debugging
-        
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
-    };
-
-fetchProfile();
-
-}, [profileId]);
+  const { profile } = data as { profile: Profile };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-              {profile?.username}
+            <div className="flex items-center justify-center space-x-2">
+              <UserAvatar src={profile?.imageUrl}/>
+              <span>
+                {profile?.displayName}
+                {profile?.displayName !== profile?.username && ` (${profile?.username})`}
+              </span>
+            </div>
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-              {profile?.status}
+            {profile?.about}
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
-          "Hi"
+          <div className="p-4">
+            <div><strong>Status:</strong> {profile?.status}</div>
+          </div>
         </ScrollArea>
       </DialogContent>
     </Dialog>
