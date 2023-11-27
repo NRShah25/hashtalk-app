@@ -5,6 +5,7 @@ export type ModalType = "profile" | "explore" | "editProfile" | "createServer" |
 
 interface ModalData {
     profile?: Profile;
+    isAuthenticated?: boolean;
     server?: Server;
     channel?: Channel;
     channelType?: ChannelType;
