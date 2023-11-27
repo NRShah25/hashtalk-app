@@ -139,7 +139,7 @@ return (
                     <ServerAvatar src={profile.imageUrl} />
                     <div className="flex flex-col gap-y-1">
                       <div className="font-semibold text-s flex items-baseline">
-                        <span className="font-bold">{profile.displayName}</span>
+                      {profile.displayName === profile.username ? profile.displayName : `${profile.displayName} (${profile.username})`}
                       </div>
                       <span className="text-xs">{profile.about}</span>
                     </div>
