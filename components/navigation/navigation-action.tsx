@@ -15,16 +15,17 @@ import { Profile } from "@prisma/client";
 
 interface NavigationActionProps {
     profile: Profile;
+    isAuthenticated: boolean;
 }
 
-export const NavigationAction = ({ profile }: NavigationActionProps) => {
+export const NavigationAction = ({ profile, isAuthenticated }: NavigationActionProps) => {
     const { onOpen } = useModal();
 
     const handleOpenProfileModal = () => {
-        if (profile) {
-            onOpen("profile", { profile });
+        if (isAuthenticated && profile) {
+            onOpen("profile", { profile, isAuthenticated: true });
         } else {
-            console.log("Profile not loaded yet or no authenticated user.");
+            console.log("User is not authenticated or profile not loaded.");
         }
     };
 
