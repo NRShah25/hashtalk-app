@@ -21,7 +21,7 @@ export const ProfileModal = () => {
   const [loadingId, setLoadingId] = useState("");
 
   const isModalOpen = isOpen && type === "profile";
-  const { profile } = data as { profile: Profile };
+  const { profile, isAuthenticated } = data as { profile: Profile; isAuthenticated?: boolean };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -41,6 +41,7 @@ export const ProfileModal = () => {
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
+          {isAuthenticated && <div>Welcome to your profile!</div>}
           <div className="p-4">
             <div><strong>Status:</strong> {profile?.status}</div>
           </div>
