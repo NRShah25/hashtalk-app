@@ -37,13 +37,13 @@ export const ProfileModal = () => {
             </div>
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            {profile?.about}
+            "{profile?.status}"
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="mt-8 max-h-[420px] pr-6">
           {isAuthenticated && <div>Welcome to your profile!</div>}
           <div className="p-4">
-            <div><strong>Status:</strong> {profile?.status}</div>
+            <div><strong>About me:</strong> {profile?.about}</div>
           </div>
         </ScrollArea>
       </DialogContent>
