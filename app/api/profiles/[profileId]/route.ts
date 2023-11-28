@@ -24,3 +24,30 @@ export async function GET(req: { url: string | URL; }) {
         return new NextResponse("Internal Error", { status: 500 });
     }
 }
+
+export async function PATCH(
+    req: Request,
+    { params }: { params: { profileId: string } }
+  ): Promise<NextResponse> {
+    try {
+      const { displayName, status, about, accessLevel } = await req.json();
+  
+      const updatedProfile = await db.profile.update({
+        where: {
+          id: params.profileId,
+        },
+        data: {
+          displayName,
+          status, 
+          about,
+          accessLevel,
+        }
+      });
+  
+      return NextResponse.json(updatedProfile);
+    } catch (error) {
+      console.log("[PROFILE_ID_PATCH]", error);
+      return new NextResponse("Internal Error", { status: 500 });
+    }
+  }
+  
