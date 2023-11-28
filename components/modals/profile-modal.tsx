@@ -12,8 +12,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useModal } from "@/hooks/use-modal-store";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserAvatar } from "../user-avatar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { z } from "zod";
 
 export const ProfileModal = () => {
   const router = useRouter();
@@ -30,22 +32,89 @@ export const ProfileModal = () => {
           <DialogTitle className="text-2xl text-center font-bold">
             <div className="flex items-center justify-center space-x-2">
               <UserAvatar src={profile?.imageUrl}/>
-              <span>
-                {profile?.displayName}
-                {profile?.displayName !== profile?.username && ` (${profile?.username})`}
-              </span>
             </div>
           </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
-            "{profile?.status}"
+          <DialogDescription className="text-2xl text-center font-bold">
+            {profile?.displayName}
+            {profile?.displayName !== profile?.username && ` (${profile?.username})`}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="mt-8 max-h-[420px] pr-6">
-          {isAuthenticated && <div>Welcome to your profile!</div>}
-          <div className="p-4">
-            <div><strong>About me:</strong> {profile?.about}</div>
-          </div>
-        </ScrollArea>
+          {isAuthenticated && <div>
+            <Tabs defaultValue="view">
+              <TabsList className="flex justify-center">
+                <TabsTrigger value="view">View</TabsTrigger>
+                <TabsTrigger value="edit">Edit</TabsTrigger>
+              </TabsList>
+              <TabsContent value="view">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      Status
+                    </CardTitle>
+                    <CardDescription>
+                      Last updated {profile?.updatedAt ? profile.updatedAt.toLocaleString() : 'never'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{profile?.status}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      About
+                    </CardTitle>
+                    <CardDescription>
+                      User since {profile?.createdAt ? profile.createdAt.toLocaleDateString() : 'forever'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{profile?.about}</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="edit">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      Edit Profile
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{profile?.about}</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>}
+          {!isAuthenticated && <div>
+            <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      Status
+                    </CardTitle>
+                    <CardDescription>
+                      Last updated {profile?.updatedAt ? profile.updatedAt.toLocaleString() : 'never'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{profile?.status}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      About
+                    </CardTitle>
+                    <CardDescription>
+                      Last updated {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : 'N/A'}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{profile?.about}</p>
+                  </CardContent>
+                </Card>
+          </div>}
       </DialogContent>
     </Dialog>
   )
