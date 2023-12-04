@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(req: { url: string; }) {
+export async function GET(req: NextRequest) {
     try {
         const url = new URL(req.url);
         const profileId = url.searchParams.get('profileId');
@@ -50,4 +50,3 @@ export async function PATCH(
       return new NextResponse("Internal Error", { status: 500 });
     }
   }
-  
