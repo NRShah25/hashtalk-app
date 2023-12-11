@@ -10,7 +10,7 @@ import { ChatItem } from "./chat-item";
 import { useChatSocket } from "@/hooks/use-chat-socket";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
 
-const DATE_FORMAT = "d MMM yyyy, HH:mm";
+const DATE_FORMAT = "MMM d yyyy, HH:mm";
 
 type MessageWithMemberWithProfile = Message & {
     member: Member & {
