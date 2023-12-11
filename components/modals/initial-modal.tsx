@@ -141,7 +141,7 @@ return (
           <TabsTrigger value="create">Create</TabsTrigger>
         </TabsList>
         <TabsContent value="join">
-          <ScrollArea className="mt-8 max-h-[420px] pr-6">
+          <ScrollArea className="mt-8 max-h-[420px] pr-6 overflow-y-auto">
             {servers.length > 0 ? (
               servers.map((server) => (
                 <div key={server.id} className="flex items-center justify-between gap-x-2 mb-6">
@@ -150,9 +150,8 @@ return (
                     <div className="flex flex-col gap-y-1">
                       <div className="font-semibold text-s flex items-baseline">
                         <span className="font-bold">{server.name}</span>
-                        <span className="mx-2">•</span>
-                        <span>{server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
                       </div>
+                      <span className="text-xs">{server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
                       <span className="text-xs">{server.description}</span>
                     </div>
                   </div>
