@@ -106,7 +106,7 @@ return (
           <TabsTrigger value="profiles">Profiles</TabsTrigger>
         </TabsList>
         <TabsContent value="servers">
-          <ScrollArea className="mt-8 max-h-[420px] pr-6">
+          <ScrollArea className="mt-8 max-h-[420px] pr-6 overflow-y-auto">
             {servers.map((server) => (
               <div key={server.id} className="flex items-center justify-between gap-x-2 mb-6">
                 <div className="flex items-center gap-x-2">
