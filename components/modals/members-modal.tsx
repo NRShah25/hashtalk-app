@@ -7,6 +7,7 @@ import {
   Gavel,
   Loader2,
   MoreVertical, 
+  ShieldMinus, 
   Star
 } from "lucide-react";
 import { useState } from "react";
@@ -122,19 +123,22 @@ export const MembersModal = () => {
                     <DropdownMenuContent className="origin-top-right right-0" side="right">
             {member.role !== "GUEST" && (
               <DropdownMenuItem
-                onClick={() => onRoleChange(member.id, "GUEST")}>
-                <div className="h-4 w-4 mr-2" />
+                onClick={() => onRoleChange(member.id, "GUEST")}
+                className="transition-colors duration-200 hover:bg-gray-200">
+              <ShieldMinus className="h-4 w-4 mr-2" />
                 Demote to Guest
               </DropdownMenuItem>
             )}
             {member.role !== "MODERATOR" && (
-            <DropdownMenuItem onClick={() => onRoleChange(member.id, "MODERATOR")}>
+            <DropdownMenuItem onClick={() => onRoleChange(member.id, "MODERATOR")}
+            className="transition-colors duration-200 hover:bg-gray-200">
               <Star className="h-4 w-4 mr-2 fill-current text-gray-300 mr-2" />
               Promote to Moderator
             </DropdownMenuItem>
             )}
             <DropdownMenuSeparator/>
-            <DropdownMenuItem onClick={() => onKick(member.id)}>
+            <DropdownMenuItem onClick={() => onKick(member.id)}
+            className="transition-colors duration-200 hover:bg-gray-200">
               <Gavel className="h-4 w-4 mr-2" />
               Kick
             </DropdownMenuItem>
