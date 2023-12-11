@@ -115,7 +115,7 @@ return (
                     <div className="font-semibold text-s flex items-baseline">
                       <span className="font-bold">{server.name}</span>
                     </div>
-                    <span> {server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
+                    <span className = "text-xs"> {server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
                     <span className="text-xs">{server.description}</span>
                   </div>
                 </div>
