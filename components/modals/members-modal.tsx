@@ -128,11 +128,10 @@ export const MembersModal = () => {
               </DropdownMenuItem>
             )}
             {member.role !== "MODERATOR" && (
-              <DropdownMenuItem
-                onClick={() => onRoleChange(member.id, "MODERATOR")}>
-                <Star className="h-4 w-4 ml-auto fill-current text-gray-300" />
-                Promote to Moderator
-              </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onRoleChange(member.id, "MODERATOR")}>
+              <Star className="h-4 w-4 mr-2 fill-current text-gray-300 mr-2" />
+              Promote to Moderator
+            </DropdownMenuItem>
             )}
             <DropdownMenuSeparator/>
             <DropdownMenuItem onClick={() => onKick(member.id)}>
