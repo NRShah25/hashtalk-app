@@ -105,8 +105,8 @@ return (
           <TabsTrigger value="servers">Servers</TabsTrigger>
           <TabsTrigger value="profiles">Profiles</TabsTrigger>
         </TabsList>
-        <ScrollArea className="mt-8 max-h-[420px] pr-6">
         <TabsContent value="servers">
+          <ScrollArea className="mt-8 pr-6">
             {servers.map((server) => (
               <div key={server.id} className="flex items-center justify-between gap-x-2 mb-6">
                 <div className="flex items-center gap-x-2">
@@ -124,8 +124,8 @@ return (
                 </Button>
               </div>
             ))}
+          </ScrollArea>
         </TabsContent>
-        </ScrollArea>
         <TabsContent value="profiles">
           <ScrollArea className="mt-8 max-h-[420px] pr-6">
               {profiles.map((profile) => (
