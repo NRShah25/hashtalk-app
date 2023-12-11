@@ -114,7 +114,6 @@ return (
                   <div className="flex flex-col gap-y-1">
                     <div className="font-semibold text-s flex items-baseline">
                       <span className="font-bold">{server.name}</span>
-                      <span className="mx-2">•</span>
                     </div>
                     <span className = "text-xs"> {server._count.members} {server._count.members === 1 ? 'member' : 'members'}</span>
                     <span className="text-xs">{server.description}</span>
@@ -128,7 +127,7 @@ return (
           </ScrollArea>
         </TabsContent>
         <TabsContent value="profiles">
-          <ScrollArea className="mt-8 max-h-[420px] pr-6">
+          <ScrollArea className="mt-8 max-h-[420px] pr-6 overflow-y-auto">
               {profiles.map((profile) => (
                 <div key={profile.id} className="flex items-center justify-between gap-x-2 mb-6">
                   <div className="flex items-center gap-x-2">
