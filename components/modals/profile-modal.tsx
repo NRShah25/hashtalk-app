@@ -25,6 +25,7 @@ import { Button } from "../ui/button";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { RadioGroupItem } from "../ui/radio-group";
 import { Input } from "../ui/input";
+import { ScrollArea } from "../ui/scroll-area";
 
 const ProfileAccessLevel = {
   PUBLIC: 'PUBLIC',
@@ -143,6 +144,7 @@ export const ProfileModal = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
+                  <ScrollArea className="mt-8 max-h-[420px] pr-6 overflow-y-auto">
                   <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
@@ -258,6 +260,7 @@ export const ProfileModal = () => {
             </DialogFooter>
           </form>
         </Form>
+        </ScrollArea>
                   </CardContent>
                 </Card>
               </TabsContent>
