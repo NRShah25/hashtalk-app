@@ -97,7 +97,7 @@ export const MembersModal = () => {
       <DialogContent className="bg-white text-black overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Manage Members
+            Members
           </DialogTitle>
           <DialogDescription 
             className="text-center text-zinc-500"
@@ -111,12 +111,9 @@ export const MembersModal = () => {
               <UserAvatar src={member.profile.imageUrl} />
               <div className="flex flex-col gap-y-1">
                 <div className="text-xs font-semibold flex items-center gap-x-1">
-                  {member.profile.username}
+                  {member.profile.displayName === member.profile.username ? member.profile.displayName : `${member.profile.displayName} (${member.profile.username})`}
                   {roleIconMap[member.role]}
                 </div>
-                <p className="text-xs text-zinc-500">
-                  {member.profile.email}
-                </p>
               </div>
               {server.profileId !== member.profileId && loadingId !== member.id && (
                 <div className="ml-auto">
@@ -126,12 +123,8 @@ export const MembersModal = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent side="left">
                       <DropdownMenuSub>
-                        <DropdownMenuSubTrigger
-                          className="flex items-center"
-                        >
-                          <Star
-                            className="w-4 h-4 mr-2"
-                          />
+                        <DropdownMenuSubTrigger className="flex items-center">
+                          <Star className="w-4 h-4 mr-2"/>
                           <span>Role</span>
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
