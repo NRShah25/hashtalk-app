@@ -143,8 +143,8 @@ export const ProfileModal = () => {
                       Edit Profile
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
                   <ScrollArea className="mt-8 max-h-[420px] pr-6 overflow-y-auto">
+                  <CardContent>
                   <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
@@ -260,8 +260,8 @@ export const ProfileModal = () => {
             </DialogFooter>
           </form>
         </Form>
-        </ScrollArea>
                   </CardContent>
+                  </ScrollArea>
                 </Card>
               </TabsContent>
             </Tabs>
