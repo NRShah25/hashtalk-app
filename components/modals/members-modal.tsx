@@ -120,28 +120,26 @@ export const MembersModal = () => {
                       <MoreVertical className="h-4 w-4 text-zinc-500" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="origin-top-right right-0" side="right">
-                      <DropdownMenuItem
-                        onClick={() => onRoleChange(member.id, "GUEST")}>
-                        <div className="h-4 w-4 mr-2" />
-                        Change Role to Guest
-                        {member.role === "GUEST" && (
-                          <Check className="h-4 w-4 ml-auto"/>
-                        )}
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => onRoleChange(member.id, "MODERATOR")}>
-                        <Star className="h-4 w-4 ml-auto fill-current text-gray-300" />
-                        Change Role to Moderator
-                        {member.role === "MODERATOR" && (
-                          <Check className="h-4 w-4 ml-auto"/>
-                        )}
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator/>
-                      <DropdownMenuItem onClick={() => onKick(member.id)}>
-                        <Gavel className="h-4 w-4 mr-2" />
-                        Kick
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
+            {member.role !== "GUEST" && (
+              <DropdownMenuItem
+                onClick={() => onRoleChange(member.id, "GUEST")}>
+                <div className="h-4 w-4 mr-2" />
+                Demote to Guest
+              </DropdownMenuItem>
+            )}
+            {member.role !== "MODERATOR" && (
+              <DropdownMenuItem
+                onClick={() => onRoleChange(member.id, "MODERATOR")}>
+                <Star className="h-4 w-4 ml-auto fill-current text-gray-300" />
+                Promote to Moderator
+              </DropdownMenuItem>
+            )}
+            <DropdownMenuSeparator/>
+            <DropdownMenuItem onClick={() => onKick(member.id)}>
+              <Gavel className="h-4 w-4 mr-2" />
+              Kick
+            </DropdownMenuItem>
+          </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
               )}
