@@ -3,15 +3,7 @@
 import { useEffect, useState } from "react";
 import { Profile } from "@prisma/client";
 import { useRouter } from "next/navigation";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useModal } from "@/hooks/use-modal-store";
 import { UserAvatar } from "../user-avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
@@ -47,6 +39,10 @@ const formSchema = z.object({
   }),
 });
 
+/**
+ * Represents a modal for user profile management.
+ * This component allows viewing and editing of a user's profile.
+ */
 export const ProfileModal = () => {
   const router = useRouter();
   const { onOpen, isOpen, onClose, type, data } = useModal();
@@ -65,6 +61,9 @@ export const ProfileModal = () => {
     }
   });
 
+  /**
+   * Effect hook to reset form with profile data when profile updates.
+   */
   useEffect(() => {
     if (profile) {
       form.reset({
@@ -75,7 +74,11 @@ export const ProfileModal = () => {
       });
     }
   }, [profile, form.reset]);
-  
+
+  /**
+   * Handles the submission of the profile form.
+   * @param {object} values - The form values to be submitted.
+   */
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/profiles/${profile?.id}`, values);
@@ -87,187 +90,180 @@ export const ProfileModal = () => {
       console.log(error);
     }
   };
-  
+
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white text-black overflow-hidden">
-        <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
-            <div className="flex items-center justify-center space-x-2">
-              <UserAvatar src={profile?.imageUrl}/>
-            </div>
-          </DialogTitle>
-          <DialogDescription className="text-2xl text-center font-bold">
-            {profile?.displayName}
-            {profile?.displayName !== profile?.username && ` (${profile?.username})`}
-          </DialogDescription>
-        </DialogHeader>
-          {isAuthenticated && <div>
-            <Tabs defaultValue="view">
-              <TabsList className="flex justify-center">
-                <TabsTrigger value="view">View</TabsTrigger>
-                <TabsTrigger value="edit">Edit</TabsTrigger>
-              </TabsList>
-              <TabsContent value="view">
+      <Dialog open={isModalOpen} onOpenChange={onClose}>
+        <DialogContent className="bg-white text-black overflow-hidden">
+          <DialogHeader className="pt-8 px-6">
+            <DialogTitle className="text-2xl text-center font-bold">
+              <div className="flex items-center justify-center space-x-2">
+                <UserAvatar src={profile?.imageUrl} />
+              </div>
+            </DialogTitle>
+            <DialogDescription className="text-2xl text-center font-bold">
+              {profile?.displayName}
+              {profile?.displayName !== profile?.username && ` (${profile?.username})`}
+            </DialogDescription>
+          </DialogHeader>
+          {isAuthenticated && (
+              <div>
+                <Tabs defaultValue="view">
+                  <TabsList className="flex justify-center">
+                    <TabsTrigger value="view">View</TabsTrigger>
+                    <TabsTrigger value="edit">Edit</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="view">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Status</CardTitle>
+                        <CardDescription>
+                          Last updated {profile?.updatedAt ? profile.updatedAt.toLocaleString() : 'never'}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p>{profile?.status}</p>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>About</CardTitle>
+                        <CardDescription>
+                          User since {profile?.createdAt ? profile.createdAt.toLocaleDateString() : 'forever'}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p>{profile?.about}</p>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  <TabsContent value="edit">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Edit Profile</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <Form {...form}>
+                          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <div className="space-y-8 px-6">
+                              <FormField
+                                  control={form.control}
+                                  name="displayName"
+                                  render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel
+                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                        >
+                                          Display Name
+                                        </FormLabel>
+                                        <FormControl>
+                                          <Input
+                                              autoComplete = "off"
+                                              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                              placeholder="Enter your display name."
+                                              {...field}
+                                          />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                  )}
+                              />
+                              <FormField
+                                  control={form.control}
+                                  name="status"
+                                  render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel
+                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                        >
+                                          Status
+                                        </FormLabel>
+                                        <FormControl>
+                                          <Input
+                                              autoComplete = "off"
+                                              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                              placeholder="How are you feeling today?"
+                                              {...field}
+                                          />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                  )}
+                              />
+                              <FormField
+                                  control={form.control}
+                                  name="about"
+                                  render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel
+                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                        >
+                                          About
+                                        </FormLabel>
+                                        <FormControl>
+                                          <Input
+                                              autoComplete = "off"
+                                              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                              placeholder="Give us your life story."
+                                              {...field}
+                                          />
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                  )}
+                              />
+                              <FormField
+                                  control={form.control}
+                                  name="accessLevel"
+                                  render={({ field }) => (
+                                      <FormItem className="space-y-3">
+                                        <FormLabel
+                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                        >
+                                          Access level
+                                        </FormLabel>
+                                        <FormControl>
+                                          <RadioGroup
+                                              onValueChange={field.onChange}
+                                              value={field.value}
+                                              className="flex flex-col space-y-1"
+                                          >
+                                            <FormItem className="flex items-center space-x-3 space-y-0">
+                                              <FormControl>
+                                                <RadioGroupItem value="PUBLIC" />
+                                              </FormControl>
+                                              <FormLabel className="font-normal">
+                                                Public
+                                              </FormLabel>
+                                            </FormItem>
+                                            <FormItem className="flex items-center space-x-3 space-y-0">
+                                              <FormControl>
+                                                <RadioGroupItem value="PRIVATE" />
+                                              </FormControl>
+                                              <FormLabel className="font-normal">
+                                                Private
+                                              </FormLabel>
+                                            </FormItem>
+                                          </RadioGroup>
+                                        </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                  )}
+                              />
+                            </div>
+                            <DialogFooter className="bg-gray-100 px-6 py-4">
+                              <Button>Save</Button>
+                            </DialogFooter>
+                          </form>
+                        </Form>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+              </div>
+          )}
+          {!isAuthenticated && (
+              <div>
                 <Card>
-                  <CardHeader>
-                    <CardTitle>
-                      Status
-                    </CardTitle>
-                    <CardDescription>
-                      Last updated {profile?.updatedAt ? profile.updatedAt.toLocaleString() : 'never'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{profile?.status}</p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>
-                      About
-                    </CardTitle>
-                    <CardDescription>
-                      User since {profile?.createdAt ? profile.createdAt.toLocaleDateString() : 'forever'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{profile?.about}</p>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="edit">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>
-                      Edit Profile
-                    </CardTitle>
-                  </CardHeader>
-                  <ScrollArea className="mt-8 max-h-[420px] pr-6 overflow-y-auto">
-                  <CardContent>
-                  <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="space-y-8 px-6">
-              <FormField
-                control={form.control}
-                name="displayName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
-                      Display Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        autoComplete = "off"
-                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                        placeholder="Enter your display name."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
-                      Status
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        autoComplete = "off"
-                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                        placeholder="How are you feeling today?"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="about"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                    >
-                      About
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        autoComplete = "off"
-                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                        placeholder="Give us your life story."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                        control={form.control}
-                        name="accessLevel"
-                        render={({ field }) => (
-                          <FormItem className="space-y-2">
-                            <FormLabel 
-                              className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                            >
-                              Access level
-                            </FormLabel>
-                            <FormControl>
-                              <RadioGroup
-                                onValueChange={field.onChange}
-                                value={field.value}
-                                className="flex flex-col space-y-1"
-                              >
-                                <FormItem className="flex items-center space-x-3 space-y-0">
-                                  <FormControl>
-                                    <RadioGroupItem value="PUBLIC" />
-                                  </FormControl>
-                                  <FormLabel className="font-normal">
-                                    Public
-                                  </FormLabel>
-                                </FormItem>
-                                <FormItem className="flex items-center space-x-3 space-y-0">
-                                  <FormControl>
-                                    <RadioGroupItem value="PRIVATE" />
-                                  </FormControl>
-                                  <FormLabel className="font-normal">
-                                    Private
-                                  </FormLabel>
-                                </FormItem>
-                              </RadioGroup>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-            </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button>
-                Save
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-                  </CardContent>
-                  </ScrollArea>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>}
-          {!isAuthenticated && <div>
-            <Card>
                   <CardHeader>
                     <CardTitle>
                       Status
@@ -293,8 +289,9 @@ export const ProfileModal = () => {
                     <p>{profile?.about}</p>
                   </CardContent>
                 </Card>
-          </div>}
-      </DialogContent>
-    </Dialog>
-  )
+              </div>
+          )}
+        </DialogContent>
+      </Dialog>
+  );
 }
